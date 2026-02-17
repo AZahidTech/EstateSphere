@@ -1,16 +1,55 @@
-# React + Vite
+# EstateSphere - Modern Society Management Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+EstateSphere is a comprehensive real estate and society management application designed to streamline operations, automate billing, and enhance community living. It provides a seamless experience for Residents, Society Owners, and Administrators.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Role-Based Access Control**: Tailored dashboards and permissions for Residents, Owners, and Admins.
+- **Smart Authentication**: Secure Login and Signup with runtime validation and password strength indicators.
+- **Community Management**:
+  - **Real-Time Chat**: Integrated messaging for instant communication.
+  - **Amenity Booking**: Streamlined scheduling for shared spaces.
+  - **Smart Alerts**: Push notifications for announcements and package arrivals.
+- **Financial Tools**:
+  - **Secure Payments**: Automated maintenance collection and transaction history.
+  - **Revenue Analytics**: Visual reports on finances and occupancy.
+- **Modern UI/UX**: Built with a responsive, high-performance design using Tailwind CSS.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend Framework**: [React](https://react.dev/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Routing**: [React Router](https://reactrouter.com/)
+- **Icons**: Custom SVG Components
 
-## Expanding the ESLint configuration
+## 📦 Installation & Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/AZahidTech/EstateSphere.git
+    cd estatesphere-frontend
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Build for production**
+    ```bash
+    npm run build
+    ```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License.
