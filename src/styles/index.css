@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@layer components {
+    .btn-primary {
+        @apply relative flex items-center justify-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 hover:shadow-xl hover:shadow-indigo-600/40 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none disabled:translate-y-0;
+    }
+
+    .btn-outline {
+        @apply flex items-center justify-center gap-2 px-8 py-4 bg-white text-indigo-600 font-semibold rounded-xl border-2 border-slate-200 hover:border-indigo-600 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 cursor-pointer;
+    }
+
+    .btn-social {
+        @apply flex items-center justify-center gap-3 px-4 py-3.5 border-2 border-slate-200 rounded-xl hover:border-slate-300 hover:bg-slate-50 transition-all duration-200 group cursor-pointer w-full;
+    }
+
+    .input-field {
+        @apply w-full px-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/10 outline-none transition-all duration-200 text-slate-900 placeholder:text-slate-400;
+    }
+
+    .badge-primary {
+        @apply inline-flex items-center gap-2 px-5 py-2 mb-6 bg-gradient-to-r from-indigo-600/10 to-purple-600/10 border border-indigo-600/20 rounded-full text-xs font-semibold tracking-wider text-indigo-600;
+    }
+
+    .section-padding {
+        @apply py-24 px-4 md:px-8;
+    }
+
+    .text-gradient {
+        @apply bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent;
+    }
+}
+
+@layer utilities {
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translate(0, 0) scale(1);
+        }
+
+        50% {
+            transform: translate(30px, -30px) scale(1.05);
+        }
+    }
+
+    @keyframes float-vertical {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes slide-down {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes sparkle {
+
+        0%,
+        100% {
+            transform: scale(1) rotate(0deg);
+        }
+
+        50% {
+            transform: scale(1.2) rotate(180deg);
+        }
+    }
+
+    @keyframes dropdown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-float {
+        animation: float 20s ease-in-out infinite;
+    }
+
+    .animate-float-vertical {
+        animation: float-vertical 3s ease-in-out infinite;
+    }
+
+    .animate-float-reverse {
+        animation: float 15s ease-in-out infinite reverse;
+    }
+
+    .animate-slide-down {
+        animation: slide-down 0.6s ease-out;
+    }
+
+    .animate-fade-up {
+        animation: fade-up 0.8s ease-out 0.2s both;
+    }
+
+    .animate-fade-up-fast {
+        animation: fade-up 0.6s ease-out both;
+    }
+
+    .animate-fade-up-delay-1 {
+        animation: fade-up 0.8s ease-out 0.4s both;
+    }
+
+    .animate-fade-up-delay-2 {
+        animation: fade-up 0.8s ease-out 0.6s both;
+    }
+
+    .animate-fade-up-delay-3 {
+        animation: fade-up 0.8s ease-out 0.8s both;
+    }
+
+    .animate-sparkle {
+        animation: sparkle 2s ease-in-out infinite;
+    }
+
+    .animate-dropdown {
+        animation: dropdown 0.2s ease-out;
+    }
+}
