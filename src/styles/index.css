@@ -2,7 +2,7 @@
 
 @layer components {
     .btn-primary {
-        @apply relative flex items-center justify-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 hover:shadow-xl hover:shadow-indigo-600/40 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none disabled:translate-y-0;
+        @apply relative flex items-center justify-center px-8 py-4 bg-linear-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 hover:shadow-xl hover:shadow-indigo-600/40 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none disabled:translate-y-0;
     }
 
     .btn-outline {
@@ -10,7 +10,7 @@
     }
 
     .btn-social {
-        @apply flex items-center justify-center gap-3 px-4 py-3.5 border-2 border-slate-200 rounded-xl hover:border-slate-300 hover:bg-slate-50 transition-all duration-200 group cursor-pointer w-full;
+        @apply flex items-center justify-center gap-3 px-4 py-3.5 border-2 border-slate-200 rounded-xl hover:border-slate-300 hover:bg-slate-50 transition-all duration-200 cursor-pointer w-full;
     }
 
     .input-field {
@@ -18,7 +18,7 @@
     }
 
     .badge-primary {
-        @apply inline-flex items-center gap-2 px-5 py-2 mb-6 bg-gradient-to-r from-indigo-600/10 to-purple-600/10 border border-indigo-600/20 rounded-full text-xs font-semibold tracking-wider text-indigo-600;
+        @apply inline-flex items-center gap-2 px-5 py-2 mb-6 bg-linear-to-r from-indigo-600/10 to-purple-600/10 border border-indigo-600/20 rounded-full text-xs font-semibold tracking-wider text-indigo-600;
     }
 
     .section-padding {
@@ -26,7 +26,47 @@
     }
 
     .text-gradient {
-        @apply bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent;
+        @apply bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent;
+    }
+
+    /* ── Shared Dashboard Classes ─────────────────────────────────────
+       Only patterns that repeat across 3+ dashboard components live here.
+       Everything else is written with Tailwind utilities directly in JSX.
+    ──────────────────────────────────────────────────────────────────── */
+
+    /* Sidebar nav button — used in all 5 sidebars */
+    .dash-nav-item {
+        @apply flex items-center gap-2.5 w-full px-3 py-2.5 rounded-xl text-[13.5px] font-medium transition-all duration-200 cursor-pointer border-0 text-left bg-transparent;
+    }
+
+    /* Stats card base — used in all 5 dashboards */
+    .dash-stat-card {
+        @apply rounded-2xl p-5 border border-[#e9ecf3];
+    }
+
+    /* Section header (title + action btn) — used in 8+ components */
+    .dash-section-header {
+        @apply flex items-center justify-between mb-4;
+    }
+
+    /* Table head row — used in Resident, Dealer, Admin tables */
+    .dash-table-head {
+        @apply grid gap-2.5 text-[10.5px] font-bold uppercase tracking-wider py-2.5 border-b border-[#e9ecf3];
+    }
+
+    /* Table data row — same components */
+    .dash-table-row {
+        @apply grid gap-2.5 items-center py-[13px] border-b border-[#e9ecf3];
+    }
+
+    /* Status / tag badge — ClientNegotiations, DealerInquiries, AdminActivity */
+    .dash-badge {
+        @apply text-[10px] font-extrabold px-2 py-[3px] rounded-[5px] tracking-wide inline-block;
+    }
+
+    /* Chart bar column — DealerLeadsChart, AdminAnalyticsSection */
+    .dash-bar {
+        @apply rounded-t-[4px] transition-opacity duration-200 hover:opacity-80;
     }
 }
 

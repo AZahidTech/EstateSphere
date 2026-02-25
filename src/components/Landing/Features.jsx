@@ -1,57 +1,7 @@
 import React from 'react';
-import UsersIcon from '../../assets/svg/Features/UsersIcon';
-import ChatIcon from '../../assets/svg/Features/ChatIcon';
-import SecurePaymentIcon from '../../assets/svg/Features/SecurePaymentIcon';
-import AnalyticsIcon from '../../assets/svg/Features/AnalyticsIcon';
-import CalendarBookingIcon from '../../assets/svg/Features/CalendarBookingIcon';
-import BellAlertIcon from '../../assets/svg/Features/BellAlertIcon';
+import { features } from '../../data/index.jsx';
 
 export default function Features() {
-    const features = [
-        {
-            icon: <UsersIcon />,
-            title: 'Role-Based Access',
-            description: 'Granular permissions for residents, owners, and admins. Ensure everyone has the right level of access to sensitive data.',
-            color: 'indigo',
-            gradient: 'from-indigo-600 to-indigo-700'
-        },
-        {
-            icon: <ChatIcon />,
-            title: 'Real-Time Chat',
-            description: 'Instant communication between society members and management. Resolve issues faster with integrated messaging.',
-            color: 'cyan',
-            gradient: 'from-cyan-600 to-cyan-700'
-        },
-        {
-            icon: <SecurePaymentIcon />,
-            title: 'Secure Payments',
-            description: 'Automated maintenance collection and encrypted transactions. Easy digital payment history tracking.',
-            color: 'emerald',
-            gradient: 'from-emerald-600 to-emerald-700'
-        },
-        {
-            icon: <AnalyticsIcon />,
-            title: 'Insightful Analytics',
-            description: 'Visualize your estate\'s performance with comprehensive reports on occupancy, finances, and maintenance.',
-            color: 'violet',
-            gradient: 'from-violet-600 to-violet-700'
-        },
-        {
-            icon: <CalendarBookingIcon />,
-            title: 'Amenity Booking',
-            description: 'Streamlined scheduling for community halls, gyms, and shared spaces with automated conflict resolution.',
-            color: 'amber',
-            gradient: 'from-amber-600 to-amber-700'
-        },
-        {
-            icon: <BellAlertIcon />,
-            title: 'Smart Alerts',
-            description: 'Push notifications and SMS alerts for urgent notices, package arrivals, and community announcements.',
-            color: 'pink',
-            gradient: 'from-pink-600 to-pink-700'
-        }
-    ];
-
     return (
         <section className="relative py-24 px-4 md:px-8 bg-gradient-to-b from-white to-slate-50 overflow-hidden">
             {/* Top Border Gradient */}
@@ -94,7 +44,7 @@ export default function Features() {
                             <h3 className={`text-xl font-bold text-slate-900 mb-3 group-hover:text-${feature.color}-600 transition-colors duration-300`}>
                                 {feature.title}
                             </h3>
-                            <p className="text-slate-600 leading-relaxed">
+                            <p className="text-slate-600 leading-relaxed font-medium">
                                 {feature.description}
                             </p>
                         </div>
@@ -111,8 +61,6 @@ export default function Features() {
                     </p>
                 </div>
             </div>
-
-
         </section>
     );
 }
