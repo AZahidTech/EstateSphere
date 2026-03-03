@@ -19,7 +19,7 @@ const AdminRecentActivity = () => {
             </div>
 
             <div className="overflow-x-auto">
-                <div className="grid gap-4 text-[11px] font-black text-slate-400 uppercase tracking-widest pb-4 border-b border-slate-100 mb-2 px-2" style={{ gridTemplateColumns: cols, minWidth: "900px" }}>
+                <div className="grid gap-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest pb-4 border-b border-slate-100 mb-2 px-2" style={{ gridTemplateColumns: cols, minWidth: "900px" }}>
                     <span>ACTION & DESCRIPTION</span>
                     <span>SOCIETY</span>
                     <span>ADMINISTRATOR</span>
@@ -40,7 +40,7 @@ const AdminRecentActivity = () => {
                             <span className="text-[13px] text-slate-600 font-medium">{a.society}</span>
 
                             <div className="flex items-center gap-3 text-[13px] text-slate-900">
-                                <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[12px] font-black text-slate-900 ring-2 ring-white shadow-xs">
+                                <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[12px] font-bold text-slate-800 ring-2 ring-white shadow-xs">
                                     {a.admin.name.charAt(0)}
                                 </div>
                                 <span className="font-bold">{a.admin.name}</span>
@@ -48,7 +48,7 @@ const AdminRecentActivity = () => {
 
                             <span className="text-[13px] text-slate-500 font-bold italic tracking-tight">{a.timestamp}</span>
 
-                            <span className={`px-2.5 py-1 rounded-full text-[10px] font-black tracking-widest text-center w-fit shadow-xs ${a.statusClass}`}>
+                            <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-widest text-center w-fit shadow-xs ${a.statusClass}`}>
                                 {a.status}
                             </span>
                         </div>

@@ -6,6 +6,7 @@ import EyeSlashIcon from '../../assets/svg/Auth/EyeSlashIcon';
 import GoogleIcon from '../../assets/svg/Auth/GoogleIcon';
 import AppleIcon from '../../assets/svg/Auth/AppleIcon';
 import { Link } from 'react-router-dom';
+import { socialProviders } from '../../data/index.jsx';
 
 export default function LoginForm() {
     const [email, setEmail] = useState('');
@@ -100,9 +101,9 @@ export default function LoginForm() {
                                 Remember me for 30 days
                             </span>
                         </label>
-                        <a href="#" className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors">
+                        <Link to="/ForgotPassword" className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors">
                             Forgot password?
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Submit Button */}
@@ -128,20 +129,16 @@ export default function LoginForm() {
 
                 {/* Social Login Buttons */}
                 <div className="grid grid-cols-2 gap-4">
-                    <button
-                        type="button"
-                        className="flex items-center justify-center gap-3 px-4 py-3.5 border-2 border-slate-200 rounded-xl hover:border-slate-300 hover:bg-slate-50 transition-all duration-200 group"
-                    >
-                        <GoogleIcon className="w-5 h-5" />
-                        <span className="font-semibold text-slate-700 group-hover:text-slate-900">Google</span>
-                    </button>
-                    <button
-                        type="button"
-                        className="flex items-center justify-center gap-3 px-4 py-3.5 border-2 border-slate-200 rounded-xl hover:border-slate-300 hover:bg-slate-50 transition-all duration-200 group"
-                    >
-                        <AppleIcon className="w-5 h-5" />
-                        <span className="font-semibold text-slate-700 group-hover:text-slate-900">Apple</span>
-                    </button>
+                    {socialProviders.map((provider, idx) => (
+                        <button
+                            key={idx}
+                            type="button"
+                            className="flex items-center justify-center gap-3 px-4 py-3.5 border-2 border-slate-200 rounded-xl hover:border-slate-300 hover:bg-slate-50 transition-all duration-200 group"
+                        >
+                            {provider.provider === 'google' ? <GoogleIcon className="w-5 h-5" /> : <AppleIcon className="w-5 h-5" />}
+                            <span className="font-semibold text-slate-700 group-hover:text-slate-900">{provider.name}</span>
+                        </button>
+                    ))}
                 </div>
 
                 {/* Sign Up Section */}

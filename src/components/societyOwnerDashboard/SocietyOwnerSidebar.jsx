@@ -1,46 +1,51 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import { societyOwnerNavItems } from "../../data/index.jsx";
 
 const navItems = societyOwnerNavItems;
 
-const SocietyOwnerSidebar = () => (
-    <aside className="w-[240px] min-w-[240px] bg-white border-r border-slate-200 flex flex-col h-screen shadow-sm">
-        <div className="flex items-center gap-3 px-6 py-6 border-b border-slate-100">
-            <div className="w-10 h-10 rounded-xl bg-linear-to-r from-blue-600 to-indigo-600 flex items-center justify-center flex-shrink-0 shadow-md shadow-blue-100">
-                <svg width="22" height="22" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>
-            </div>
-            <span className="text-xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">EstateSphere</span>
-        </div>
+const SocietyOwnerSidebar = () => {
+    const location = useLocation();
 
-        <nav className="flex-1 px-4 py-6 space-y-1">
-            {navItems.map((item, i) => (
-                <button
-                    key={i}
-                    className={`group flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all duration-200 font-medium text-[14px]
-            ${item.active
-                            ? "bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-100"
-                            : "text-slate-600 hover:bg-slate-50 hover:text-blue-600"}`}
-                >
-                    <span className={`transition-colors duration-200 ${item.active ? "text-white" : "text-slate-400 group-hover:text-blue-600"}`}>
-                        {item.icon}
-                    </span>
-                    {item.label}
-                </button>
-            ))}
-        </nav>
-
-        <div className="p-4 mt-auto">
-            <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-[15px] font-bold shadow-sm ring-2 ring-white flex-shrink-0">
-                    U
+    return (
+        <aside className="w-[200px] min-w-[200px] bg-white border-r border-[#e9ecf3] flex flex-col h-screen">
+            <div className="flex items-center gap-2.5 px-5 py-[22px] border-b border-[#e9ecf3]">
+                <div className="w-9 h-9 rounded-[10px] bg-indigo-600 flex items-center justify-center flex-shrink-0">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>
                 </div>
-                <div className="overflow-hidden">
-                    <p className="text-[14px] font-bold text-slate-900 truncate">Usman Sheikh</p>
-                    <p className="text-[11px] text-slate-500 font-medium">Society Owner · Block B</p>
+                <span className="text-[15px] font-bold text-[#1e2535]">EstateSphere</span>
+            </div>
+
+            <nav className="flex-1 flex flex-col gap-0.5 px-3 py-4 overflow-y-auto">
+                <p className="px-4 text-[10px] font-bold text-[#7b8399] uppercase tracking-wider mb-2">Society Owner</p>
+                {navItems.map((item, i) => {
+                    const isActive = location.pathname === item.route;
+                    return (
+                        <Link
+                            key={i}
+                            to={item.route || "#"}
+                            className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-[13px] font-medium transition-all ${isActive ? "bg-indigo-50 text-indigo-600 font-bold" : "text-[#7b8399] hover:bg-[#f5f7fb] hover:text-[#1e2535]"}`}
+                        >
+                            <span className={`flex items-center ${isActive ? "text-indigo-600" : "text-[#7b8399]"}`}>{item.icon}</span>
+                            {item.label}
+                        </Link>
+                    );
+                })}
+            </nav>
+
+            <div className="px-5 py-4 border-t border-[#e9ecf3]">
+                <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-[13px] font-bold flex-shrink-0 shadow-sm">
+                        U
+                    </div>
+                    <div className="overflow-hidden">
+                        <p className="text-[13px] font-semibold text-[#1e2535] truncate">Usman Sheikh</p>
+                        <p className="text-[11px] text-[#7b8399] truncate">Society Admin</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </aside>
-);
+        </aside>
+    );
+};
 
 export default SocietyOwnerSidebar;

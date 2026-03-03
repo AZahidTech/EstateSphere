@@ -62,46 +62,302 @@ export const adminStats = [
 ];
 
 export const clientNavItems = [
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>, label: "Dashboard", active: true },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>, label: "Saved Properties" },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>, label: "Tour Requests" },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>, label: "My Offers" },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>, label: "Messages" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>, label: "Dashboard", route: "/Client" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>, label: "Saved Properties", route: "/SavedProperties" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>, label: "Tour Requests", route: "/TourRequests" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>, label: "My Offers", route: "/MyOffers" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>, label: "Messages", route: "/Messages" },
 ];
 
 export const residentNavItems = [
-  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>, label: "Dashboard", active: true },
-  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1" /><path d="M9 22V12h6v10M9 7h1M14 7h1" /></svg>, label: "My Property" },
-  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></svg>, label: "Maintenance" },
-  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /></svg>, label: "Complaints" },
-  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg>, label: "Visitors" },
-  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" /></svg>, label: "Payments" },
+  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>, label: "Dashboard", route: "/Resident" },
+  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1" /><path d="M9 22V12h6v10M9 7h1M14 7h1" /></svg>, label: "My Property", route: "/MyProperty" },
+  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></svg>, label: "Maintenance", route: "/Maintenance" },
+  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /></svg>, label: "Complaints", route: "/ComplaintsManagement" },
+  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg>, label: "Visitors", route: "/Visitors" },
+  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" /></svg>, label: "Payments", route: "/Payments" },
 ];
 
 export const dealerNavItems = [
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>, label: "Dashboard", active: true },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>, label: "My Listings" },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="8.5" cy="7" r="4" /><line x1="20" y1="8" x2="20" y2="14" /><line x1="17" y1="11" x2="23" y2="11" /></svg>, label: "Leads" },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>, label: "Client Meetings" },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>, label: "Earnings" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>, label: "Dashboard", route: "/Dealer" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>, label: "My Listings", route: "/MyListings" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="8.5" cy="7" r="4" /><line x1="20" y1="8" x2="20" y2="14" /><line x1="17" y1="11" x2="23" y2="11" /></svg>, label: "Leads", route: "/Leads" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>, label: "Client Meetings", route: "/Meetings" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>, label: "Earnings", route: "/Earnings" },
 ];
 
 export const societyOwnerNavItems = [
-  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>, label: "Dashboard", active: true },
-  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1" /><path d="M9 22V12h6v10M9 7h1M14 7h1" /></svg>, label: "My Property" },
-  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></svg>, label: "Maintenance" },
-  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /></svg>, label: "Complaints" },
-  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg>, label: "Visitors" },
-  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" /><line x1="1" y1="10" x2="23" y2="10" /></svg>, label: "Payments" },
+  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>, label: "Dashboard", route: "/SocietyOwner" },
+  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1" /><path d="M9 22V12h6v10M9 7h1M14 7h1" /></svg>, label: "My Property", route: "/MyProperty" },
+  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></svg>, label: "Maintenance", route: "/Maintenance" },
+  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /></svg>, label: "Complaints", route: "/ComplaintsManagement" },
+  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg>, label: "Visitors", route: "/Visitors" },
+  { icon: <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" /><line x1="1" y1="10" x2="23" y2="10" /></svg>, label: "Payments", route: "/Payments" },
 ];
 
 export const adminNavItems = [
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>, label: "Dashboard", active: true },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="7" width="9" height="14" rx="1" /><rect x="13" y="3" width="9" height="18" rx="1" /></svg>, label: "Societies" },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="1" /><path d="M9 22V12h6v10M9 7h1M14 7h1" /></svg>, label: "Properties" },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg>, label: "Residents" },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /></svg>, label: "Complaints", badge: "12" },
-  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" /></svg>, label: "Subscriptions" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>, label: "Dashboard", route: "/SuperAdmin" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="7" width="9" height="14" rx="1" /><rect x="13" y="3" width="9" height="18" rx="1" /></svg>, label: "Societies", route: "/Societies" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="1" /><path d="M9 22V12h6v10M9 7h1M14 7h1" /></svg>, label: "Properties", route: "/AddPropertyBasic" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg>, label: "User Management", route: "/UserManagement" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /></svg>, label: "Complaints", badge: "12", route: "/ComplaintsManagement" },
+  { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" /></svg>, label: "Messages", route: "/Messages" },
+];
+
+export const navbarLinks = [
+  {
+    label: "Products",
+    dropdown: [
+      { label: "Property Management", route: "#" },
+      { label: "Billing & Payments", route: "#" },
+      { label: "Community Portal", route: "#" },
+      { label: "Analytics Dashboard", route: "#" },
+    ]
+  },
+  {
+    label: "Solutions",
+    dropdown: [
+      { label: "For Residents", route: "#" },
+      { label: "For Property Managers", route: "#" },
+      { label: "For Developers", route: "#" },
+      { label: "For Enterprises", route: "#" },
+    ]
+  },
+  { label: "Pricing", route: "#" },
+  { label: "About", route: "#" },
+];
+
+export const footerLinks = {
+  product: [
+    { label: "Features", route: "#" },
+    { label: "Integrations", route: "#" },
+    { label: "Changelog", route: "#" },
+    { label: "Pricing", route: "#" },
+  ],
+  resources: [
+    { label: "Documentation", route: "#" },
+    { label: "Help Center", route: "#" },
+    { label: "Blog", route: "#" },
+    { label: "Community", route: "#" },
+  ],
+  company: [
+    { label: "About Us", route: "#" },
+    { label: "Careers", route: "#" },
+    { label: "Press", route: "#" },
+    { label: "Contact", route: "#" },
+  ],
+  legal: [
+    { label: "Privacy Policy", route: "#" },
+    { label: "Terms of Service", route: "#" },
+    { label: "Cookie Policy", route: "#" },
+  ]
+};
+
+export const clientNearbyAmenities = [
+  { name: "Metro Station", dist: "0.3 mi" },
+  { name: "Whole Foods", dist: "0.5 mi" },
+  { name: "City Park", dist: "0.7 mi" },
+  { name: "Elementary School", dist: "1.1 mi" },
+];
+
+export const propertyAmenitiesList = [
+  { label: "Fitness Center", checked: false },
+  { label: "Swimming Pool", checked: true },
+  { label: "Private Parking", checked: true },
+  { label: "24/7 Security", checked: true },
+  { label: "High-speed Wifi", checked: false },
+  { label: "Air Conditioning", checked: true },
+  { label: "Balcony", checked: false },
+  { label: "Pet Friendly", checked: false },
+];
+
+export const addPropertySteps = [
+  { id: 1, label: "Basic Info" },
+  { id: 2, label: "Media" },
+  { id: 3, label: "Pricing" },
+  { id: 4, label: "Review" },
+];
+
+export const reviewPropertyAmenities = [
+  "High-speed Fiber Internet",
+  "Smart Home Hub Integration",
+  "Private Balcony with City View",
+  "Central Heating & A/C"
+];
+
+export const reviewLocationDetails = [
+  { l: "Walk Score: 94 (Walker's Paradise)", i: "🚶" },
+  { l: "0.3 miles to Transit Station", i: "🚆" },
+  { l: "Near Central Park District", i: "🌳" },
+  { l: "Top-rated School Zone", i: "🎓" },
+];
+
+export const propertyTypes = [
+  "Select type",
+  "Residential",
+  "Commercial",
+  "Industrial"
+];
+
+export const addPropertyUploadedFiles = [
+  { id: 1, type: "image", src: "https://images.unsplash.com/photo-1600585154340-be6191dae10c?auto=format&fit=crop&q=80&w=200", isPrimary: true },
+  { id: 2, type: "image", src: "https://images.unsplash.com/photo-1600607687940-4e3650239e1e?auto=format&fit=crop&q=80&w=200", isPrimary: false },
+  { id: 3, type: "video", src: "https://images.unsplash.com/photo-1556911220-e15224bbaf40?auto=format&fit=crop&q=80&w=200", isPrimary: false },
+];
+
+export const signupRoles = [
+  { value: "resident", label: "Resident" },
+  { value: "owner", label: "Society Owner" },
+  { value: "admin", label: "Admin" },
+];
+
+export const mockComplaints = [
+  { id: "#CMP-1042", subject: "Elevator B-2 Malfunction", category: "Mechanical Failure", priority: "High Priority", user: "Sarah Jenkins", date: "Oct 24, 2023 09:15 AM", status: "Pending" },
+  { id: "#CMP-1041", subject: "Leaking Pipe in Master Bath", category: "Plumbing", priority: "Medium Priority", user: "Robert Wilson", date: "Oct 23, 2023 04:20 PM", status: "In Progress" },
+  { id: "#CMP-1039", subject: "Trash Collection Schedule", category: "Sanitation", priority: "Low Priority", user: "Emily Davis", date: "Oct 22, 2023 11:45 AM", status: "Resolved" },
+  { id: "#CMP-1038", subject: "Lobby Lighting Flickering", category: "Electrical", priority: "Medium Priority", user: "Michael Chen", date: "Oct 21, 2023 02:30 PM", status: "Resolved" },
+  { id: "#CMP-1037", subject: "Noise Complaint Unit 4B", category: "Policy Violation", priority: "High Priority", user: "Olivia Thompson", date: "Oct 20, 2023 10:10 PM", status: "Pending" },
+];
+
+export const mockUsers = [
+  { id: 1, name: "Sarah Miller", email: "sarah.m@example.com", role: "Super Admin", avatar: "SM", joined: "Oct 24, 2023", status: "Active" },
+  { id: 2, name: "James Wilson", email: "j.wilson@propertymgmt.com", role: "Owner", avatar: "JW", joined: "Nov 12, 2023", status: "Active" },
+  { id: 3, name: "Emily Chen", email: "emily.c@horizonapt.com", role: "Resident", avatar: "EC", joined: "Jan 05, 2024", status: "Active" },
+  { id: 4, name: "Robert Taylor", email: "r.taylor@brokerage.net", role: "Dealer", avatar: "RT", joined: "Feb 14, 2024", status: "Inactive" },
+  { id: 5, name: "Marcus Gray", email: "marcus@invest-corp.com", role: "Client", avatar: "MG", joined: "Mar 01, 2024", status: "Active" },
+];
+
+export const activityHistory = [
+  {
+    user: "Robert Wilson",
+    role: "Admin",
+    action: "Changed status from Open to In Progress.",
+    comment: "Dispatching plumbers immediately to check Unit 5B. Resident in 4B has been notified.",
+    time: "2 hours ago",
+    isLast: false
+  },
+  {
+    user: "System Notification",
+    role: "Auto",
+    action: "Complaint CMP-1024 was assigned to Maintenance Team A.",
+    time: "4 hours ago",
+    isLast: false
+  },
+  {
+    user: "Sarah Jenkins",
+    role: "Resident",
+    action: "Complaint submitted via EstateSphere Mobile App.",
+    date: "Oct 24, 10:45 AM",
+    isLast: true
+  }
+];
+
+export const userManagementStats = [
+  {
+    title: "Total Platform Users",
+    value: "1,240",
+    iconContent: "👥",
+    trend: "up",
+    trendValue: "+12%",
+    color: "bg-indigo-500",
+  },
+  {
+    title: "Verified Society Owners",
+    value: "342",
+    iconContent: "🏰",
+    trend: "up",
+    trendValue: "LEGIT",
+    color: "bg-purple-500",
+  },
+  {
+    title: "Active Tenants",
+    value: "816",
+    iconContent: "🏠",
+    trend: "up",
+    trendValue: "STABLE",
+    color: "bg-emerald-500",
+  },
+  {
+    title: "Pending Verifications",
+    value: "18",
+    iconContent: "🛡️",
+    trend: "down",
+    trendValue: "URGENT",
+    color: "bg-amber-500",
+  },
+];
+
+export const complaintsManagementStats = [
+  { title: "TOTAL TICKETS", value: "128", icon: "🎫", bg: "bg-indigo-50", color: "text-indigo-600" },
+  { title: "PENDING", value: "42", icon: "⏳", bg: "bg-amber-50", color: "text-amber-600" },
+  { title: "IN PROGRESS", value: "18", icon: "⚙️", bg: "bg-blue-50", color: "text-blue-600" },
+  { title: "RESOLVED", value: "68", icon: "✅", bg: "bg-emerald-50", color: "text-emerald-600" },
+];
+
+export const messageChats = [
+  { name: "Sarah Jenkins", role: "TENANT", message: "The leak in 4B is getting...", time: "12:45 PM", unread: 2, active: true, color: "bg-indigo-500" },
+  { name: "Marco Rossi", role: "STAFF", message: "I'll check the boiler rooms today.", time: "Yesterday", unread: 0, color: "bg-purple-500" },
+  { name: "East Wing Residents", role: "GROUP", message: "Reminder: Roof party at 7PM!", time: "Aug 22", unread: 0, color: "bg-emerald-500" },
+  { name: "Elena Vance", role: "OWNER", message: "Contract sent for Unit 12C.", time: "Aug 21", unread: 0, color: "bg-rose-500" },
+];
+
+export const dashboardMockupChartData = [
+  [45, 30], [65, 40], [55, 35], [85, 50],
+  [70, 45], [80, 55], [75, 48]
+];
+
+export const dashboardMockupActivities = [1, 2, 3]; // Used for demonstration mapping
+
+export const socialProviders = [
+  { name: "Google", provider: "google" },
+  { name: "Apple", provider: "apple" }
+];
+
+export const residentQuickActions = [
+  {
+    title: "Maintenance Request",
+    desc: "Report issues in your unit or common areas for quick resolution.",
+    btnText: "Raise Request",
+    theme: "dark", // or 'light'
+    iconType: "wrench"
+  },
+  {
+    title: "Pre-Approve a Guest",
+    desc: "Notify security about expected visitors to ensure seamless entry.",
+    btnText: "Add Guest",
+    theme: "light",
+    iconType: "car"
+  }
+];
+
+export const societyOwnerQuickActions = [
+  {
+    title: "Maintenance Overview",
+    desc: "View all open work orders and staff performance metrics.",
+    btnText: "Open Console",
+    theme: "dark",
+    iconType: "wrench"
+  },
+  {
+    title: "Visitor Analytics",
+    desc: "Track visitor flow trends and security logs for the past 30 days.",
+    btnText: "View Reports",
+    theme: "light",
+    iconType: "car"
+  }
+];
+
+export const chatMessages = [
+  { type: 'incoming', content: "Hi! I wanted to report that the kitchen sink faucet in Unit 4B started leaking quite heavily this morning. It's making quite a mess under the cabinet.", time: "12:38 PM", user: "Sarah Jenkins", color: "bg-indigo-500" },
+  { type: 'outgoing', content: "Hello Sarah, I'm sorry to hear that. I'll dispatch Marco from maintenance immediately. Will someone be home in the next 30 minutes to let him in?", time: "12:42 PM", status: "read" },
+  { type: 'incoming', content: "Yes, I'm working from home today. Please send him over as soon as possible. Thank you!", time: "12:45 PM", user: "Sarah Jenkins", color: "bg-indigo-500" },
+];
+
+export const complaintMainInfoSteps = [
+  { label: "Submitted", active: true, done: true },
+  { label: "In Progress", active: true, done: false },
+  { label: "Resolving", active: false, done: false },
+  { label: "Closed", active: false, done: false },
 ];
 export const features = [
   {

@@ -4,41 +4,44 @@ import { dealerLeadsSummary } from "../../data/index.jsx";
 const { days, inbound, email } = dealerLeadsSummary;
 
 const DealerLeadsChart = () => (
-    <div className="bg-white rounded-2xl p-[22px] border border-[#e9ecf3] flex-1 shadow-sm">
-        <div className="flex items-center justify-between mb-5">
-            <h2 className="text-[16px] font-bold text-[#1e2535]">Leads Overview</h2>
-            <select className="px-3.5 py-1.5 rounded-lg bg-[#f5f7fb] border border-[#e9ecf3] text-[#7b8399] text-[12px] outline-none cursor-pointer hover:border-indigo-400">
+    <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-xl shadow-slate-100/50 flex flex-col">
+        <div className="flex items-start justify-between mb-10">
+            <div>
+                <h2 className="text-xl font-bold text-slate-800 tracking-tight">Leads Overview</h2>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">WEEKLY TREND ANALYSIS</p>
+            </div>
+            <select className="px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 text-xs font-semibold outline-none cursor-pointer hover:border-indigo-400 focus:ring-4 focus:ring-indigo-600/5 transition-all">
                 <option>Last 7 Days</option>
                 <option>Last 30 Days</option>
             </select>
         </div>
-        <div className="flex items-end gap-3 h-[180px] pb-1 border-b border-[#f1f5f9]">
+        <div className="flex-1 flex items-end gap-4 h-[220px] pb-2 border-b border-slate-50 overflow-hidden px-2">
             {days.map((d, i) => (
-                <div key={i} className="flex-1 flex flex-col items-center gap-1.5 ">
-                    <div className="flex gap-[3px] items-end w-full justify-center">
+                <div key={i} className="flex-1 flex flex-col items-center group">
+                    <div className="w-full flex items-end gap-1.5 justify-center h-[180px] mb-4">
                         <div
-                            className="dash-bar bg-indigo-500 w-[14px]"
-                            style={{ height: `${(inbound[i] / 100) * 160}px` }}
+                            className="w-2.5 bg-linear-to-t from-indigo-600 to-indigo-400 rounded-t-full shadow-[0_-4px_12px_rgba(79,70,229,0.2)] transition-all duration-500 group-hover:opacity-90 cursor-pointer"
+                            style={{ height: `${(inbound[i] / 80) * 100}%` }}
                             title={`Inbound: ${inbound[i]}`}
-                        ></div>
+                        />
                         <div
-                            className="dash-bar bg-indigo-200 w-[14px]"
-                            style={{ height: `${(email[i] / 100) * 160}px` }}
+                            className="w-2.5 bg-linear-to-t from-purple-500 to-purple-300 rounded-t-full shadow-[0_-4px_12px_rgba(168,85,247,0.2)] transition-all duration-500 group-hover:opacity-90 cursor-pointer"
+                            style={{ height: `${(email[i] / 80) * 100}%` }}
                             title={`Email: ${email[i]}`}
-                        ></div>
+                        />
                     </div>
-                    <span className="text-[10px] text-[#7b8399] mt-1.5 font-bold uppercase">{d}</span>
+                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{d}</span>
                 </div>
             ))}
         </div>
-        <div className="flex items-center gap-4 mt-4">
-            <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
-                <span className="text-[12px] text-[#7b8399] font-medium">Inbound Calls</span>
+        <div className="flex items-center gap-6 mt-8">
+            <div className="flex items-center gap-2.5">
+                <div className="w-3 h-3 rounded-full bg-indigo-500 shadow-sm shadow-indigo-200"></div>
+                <span className="text-[12px] text-slate-500 font-bold uppercase tracking-wider">Inbound Calls</span>
             </div>
-            <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-indigo-200"></span>
-                <span className="text-[12px] text-[#7b8399] font-medium">Email Inquiries</span>
+            <div className="flex items-center gap-2.5">
+                <div className="w-3 h-3 rounded-full bg-purple-200 shadow-sm shadow-purple-100"></div>
+                <span className="text-[12px] text-slate-500 font-bold uppercase tracking-wider">Email Inquiries</span>
             </div>
         </div>
     </div>

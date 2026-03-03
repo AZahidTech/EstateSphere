@@ -17,8 +17,8 @@ const AdminStatsRow = () => {
                         </span>
                     </div>
                     <div>
-                        <p className="text-[13px] text-slate-500 font-bold uppercase tracking-wider">{s.label}</p>
-                        <p className="text-3xl font-black text-slate-900 mt-1">{s.value}</p>
+                        <p className="text-[12px] text-slate-400 font-semibold uppercase tracking-widest">{s.label}</p>
+                        <p className="text-3xl font-bold text-slate-800 mt-1">{s.value}</p>
                     </div>
                 </div>
             ))}

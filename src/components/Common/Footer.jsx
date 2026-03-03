@@ -5,6 +5,8 @@ import FacebookIcon from '../../assets/svg/Footer/FacebookIcon';
 import { Link } from 'react-router-dom';
 import Logo_Without_Name from '../../assets/Logo/Logo_Without_Name.png';
 
+import { footerLinks } from '../../data/index.jsx';
+
 export default function Footer() {
     const [email, setEmail] = useState('');
 
@@ -64,26 +66,13 @@ export default function Footer() {
                             Product
                         </h3>
                         <ul className="space-y-3">
-                            <li>
-                                <Link to="#" className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
-                                    Features
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="#" className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
-                                    Integrations
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="#" className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
-                                    Changelog
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="#" className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
-                                    Pricing
-                                </Link>
-                            </li>
+                            {footerLinks.product.map((link, idx) => (
+                                <li key={idx}>
+                                    <Link to={link.route || "#"} className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
@@ -93,26 +82,13 @@ export default function Footer() {
                             Resources
                         </h3>
                         <ul className="space-y-3">
-                            <li>
-                                <Link to="#" className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
-                                    Documentation
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="#" className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
-                                    Help Center
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="#" className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
-                                    Blog
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="#" className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
-                                    Community
-                                </Link>
-                            </li>
+                            {footerLinks.resources.map((link, idx) => (
+                                <li key={idx}>
+                                    <Link to={link.route || "#"} className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
@@ -122,26 +98,13 @@ export default function Footer() {
                             Company
                         </h3>
                         <ul className="space-y-3">
-                            <li>
-                                <Link to="#" className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
-                                    About Us
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="#" className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
-                                    Careers
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="#" className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
-                                    Press
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="#" className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
-                                    Contact
-                                </Link>
-                            </li>
+                            {footerLinks.company.map((link, idx) => (
+                                <li key={idx}>
+                                    <Link to={link.route || "#"} className="text-slate-400 hover:text-indigo-400 transition-colors text-sm">
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>

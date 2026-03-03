@@ -2,6 +2,7 @@ import React from 'react';
 import ArrowLeftDoubleIcon from '../../assets/svg/DashboardMockup/ArrowLeftDoubleIcon';
 import ArrowUpIcon from '../../assets/svg/DashboardMockup/ArrowUpIcon';
 import SecurityShieldIcon from '../../assets/svg/DashboardMockup/SecurityShieldIcon';
+import { dashboardMockupChartData, dashboardMockupActivities } from '../../data/index.jsx';
 
 export default function DashboardMockup() {
     return (
@@ -101,10 +102,7 @@ export default function DashboardMockup() {
                                         </div>
                                     </div>
                                     <div className="flex items-end justify-between gap-3 h-48">
-                                        {[
-                                            [45, 30], [65, 40], [55, 35], [85, 50],
-                                            [70, 45], [80, 55], [75, 48]
-                                        ].map((bars, i) => (
+                                        {dashboardMockupChartData.map((bars, i) => (
                                             <div key={i} className="flex-1 flex items-end gap-1">
                                                 <div className="flex-1 bg-gradient-to-t from-indigo-600 to-indigo-400 rounded-t transition-all duration-300 hover:from-indigo-500 hover:to-indigo-300" style={{ height: `${bars[0]}%` }}></div>
                                                 <div className="flex-1 bg-gradient-to-t from-slate-600 to-slate-500 rounded-t transition-all duration-300 hover:from-slate-500 hover:to-slate-400" style={{ height: `${bars[1]}%` }}></div>
@@ -117,7 +115,7 @@ export default function DashboardMockup() {
                                 <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/50">
                                     <h3 className="text-lg font-bold text-white mb-6">Recent Activities</h3>
                                     <div className="space-y-4">
-                                        {[1, 2, 3].map((_, i) => (
+                                        {dashboardMockupActivities.map((_, i) => (
                                             <div key={i} className="flex items-start gap-3">
                                                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex-shrink-0"></div>
                                                 <div className="flex-1 space-y-2">

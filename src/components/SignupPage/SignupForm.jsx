@@ -4,6 +4,7 @@ import GoogleIcon from '../../assets/svg/Auth/GoogleIcon';
 import EyeSlashIcon from '../../assets/svg/Auth/EyeSlashIcon';
 import EyeOpenIcon from '../../assets/svg/Auth/EyeOpenIcon';
 import ChevronDownIcon from '../../assets/svg/common/ChevronDownIcon';
+import { signupRoles } from '../../data/index.jsx';
 
 export default function SignupForm() {
     const [formData, setFormData] = useState({
@@ -222,9 +223,9 @@ export default function SignupForm() {
                                 onChange={handleChange}
                             >
                                 <option value="" disabled>Who are you?</option>
-                                <option value="resident">Resident</option>
-                                <option value="owner">Society Owner</option>
-                                <option value="admin">Admin</option>
+                                {signupRoles.map((role) => (
+                                    <option key={role.value} value={role.value}>{role.label}</option>
+                                ))}
                             </select>
                             <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
                                 <ChevronDownIcon className="w-4 h-4" />

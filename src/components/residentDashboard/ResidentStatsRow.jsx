@@ -11,10 +11,10 @@ const ResidentStatsRow = () => (
                     <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg ${s.iconBg} ${s.shadow} transform group-hover:rotate-3 group-hover:scale-110 transition-transform duration-300`}>
                         {s.icon}
                     </div>
-                    {s.badge && <span className={`text-[10px] font-black px-2.5 py-1 rounded-full shadow-xs tracking-wider ${s.badgeCls}`}>{s.badge}</span>}
+                    {s.badge && <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs tracking-wider ${s.badgeCls}`}>{s.badge}</span>}
                 </div>
-                <p className="text-[13px] text-slate-500 font-bold uppercase tracking-wider">{s.label}</p>
-                <p className="text-3xl font-black text-slate-900 mt-1">{s.value}</p>
+                <p className="text-3xl font-bold text-slate-800 mt-1">{s.value}</p>
+                <p className="text-[12px] text-slate-400 font-semibold uppercase tracking-widest mt-1.5">{s.label}</p>
             </div>
         ))}
     </div>

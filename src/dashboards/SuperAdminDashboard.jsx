@@ -7,14 +7,16 @@ import AdminRecentActivity from "../components/superAdminDashboard/AdminRecentAc
 
 const SuperAdminDashboard = () => {
   return (
-    <div className="flex h-screen overflow-hidden bg-[#f5f7fb] font-sans">
+    <div className="flex h-screen overflow-hidden bg-[#f8fafc] font-sans">
       <AdminSidebar />
       <div className="flex-1 flex flex-col overflow-hidden">
         <AdminTopbar />
-        <div className="flex-1 overflow-y-auto p-7 flex flex-col gap-5">
-          <div className="mb-1">
-            <h1 className="text-[22px] font-bold text-[#1e2535]">Dashboard Overview</h1>
-            <p className="text-[13.5px] text-[#7b8399] mt-1">Welcome back! Here's what's happening across all societies today.</p>
+        <div className="flex-1 overflow-y-auto p-8 flex flex-col gap-10">
+          <div className="flex items-start justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-slate-800 tracking-tight uppercase">System Command</h1>
+              <p className="text-[12px] text-slate-500 mt-1 font-semibold tracking-widest uppercase opacity-70">Global infrastructure monitoring</p>
+            </div>
           </div>
           <AdminStatsRow />
           <AdminAnalyticsSection />

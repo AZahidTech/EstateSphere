@@ -5,9 +5,10 @@ import XIcon from '../../assets/svg/Navbar/XIcon';
 import { Link } from 'react-router-dom';
 import Logo_Without_Name from "../../assets/Logo/Logo_Without_Name.png";
 
+import { navbarLinks } from '../../data/index.jsx';
+
 export default function Navbar() {
-  const [isProductsOpen, setIsProductsOpen] = useState(false);
-  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -26,78 +27,44 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {/* Products Dropdown */}
-            <div className="relative">
-              <button
-                onMouseEnter={() => setIsProductsOpen(true)}
-                onMouseLeave={() => setIsProductsOpen(false)}
-                className="flex items-center gap-1 text-slate-700 hover:text-indigo-600 font-medium transition-colors"
-              >
-                Products
-                <ChevronDownIcon className={`w-4 h-4 transition-transform ${isProductsOpen ? 'rotate-180' : ''}`} />
-              </button>
+            {navbarLinks.map((link, idx) => (
+              <div key={idx} className="relative">
+                {link.dropdown ? (
+                  <>
+                    <button
+                      onMouseEnter={() => setOpenDropdown(link.label)}
+                      onMouseLeave={() => setOpenDropdown(null)}
+                      className="flex items-center gap-1 text-slate-700 hover:text-indigo-600 font-medium transition-colors py-2"
+                    >
+                      {link.label}
+                      <ChevronDownIcon className={`w-4 h-4 transition-transform ${openDropdown === link.label ? 'rotate-180' : ''}`} />
+                    </button>
 
-              {isProductsOpen && (
-                <div
-                  onMouseEnter={() => setIsProductsOpen(true)}
-                  onMouseLeave={() => setIsProductsOpen(false)}
-                  className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-200 py-2 animate-dropdown"
-                >
-                  <Link to="#" className="block px-4 py-3 text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
-                    Property Management
+                    {openDropdown === link.label && (
+                      <div
+                        onMouseEnter={() => setOpenDropdown(link.label)}
+                        onMouseLeave={() => setOpenDropdown(null)}
+                        className="absolute top-full left-0 mt-0 w-56 bg-white rounded-xl shadow-xl border border-slate-200 py-2 animate-dropdown"
+                      >
+                        {link.dropdown.map((item, i) => (
+                          <Link
+                            key={i}
+                            to={item.route}
+                            className="block px-4 py-3 text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link to={link.route} className="text-slate-700 hover:text-indigo-600 font-medium transition-colors">
+                    {link.label}
                   </Link>
-                  <Link to="#" className="block px-4 py-3 text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
-                    Billing & Payments
-                  </Link>
-                  <Link to="#" className="block px-4 py-3 text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
-                    Community Portal
-                  </Link>
-                  <Link to="#" className="block px-4 py-3 text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
-                    Analytics Dashboard
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* Solutions Dropdown */}
-            <div className="relative">
-              <button
-                onMouseEnter={() => setIsSolutionsOpen(true)}
-                onMouseLeave={() => setIsSolutionsOpen(false)}
-                className="flex items-center gap-1 text-slate-700 hover:text-indigo-600 font-medium transition-colors"
-              >
-                Solutions
-                <ChevronDownIcon className={`w-4 h-4 transition-transform ${isSolutionsOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              {isSolutionsOpen && (
-                <div
-                  onMouseEnter={() => setIsSolutionsOpen(true)}
-                  onMouseLeave={() => setIsSolutionsOpen(false)}
-                  className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-200 py-2 animate-dropdown"
-                >
-                  <Link to="#" className="block px-4 py-3 text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
-                    For Residents
-                  </Link>
-                  <Link to="#" className="block px-4 py-3 text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
-                    For Property Managers
-                  </Link>
-                  <Link to="#" className="block px-4 py-3 text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
-                    For Developers
-                  </Link>
-                  <Link to="#" className="block px-4 py-3 text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
-                    For Enterprises
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            <Link to="#" className="text-slate-700 hover:text-indigo-600 font-medium transition-colors">
-              Pricing
-            </Link>
-            <Link to="#" className="text-slate-700 hover:text-indigo-600 font-medium transition-colors">
-              About
-            </Link>
+                )}
+              </div>
+            ))}
           </div>
 
           {/* CTA Buttons */}
@@ -134,18 +101,28 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden border-t border-slate-200 bg-white animate-dropdown">
           <div className="px-4 py-4 space-y-3">
-            <Link to="#" className="block px-4 py-2 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-              Products
-            </Link>
-            <Link to="#" className="block px-4 py-2 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-              Solutions
-            </Link>
-            <Link to="#" className="block px-4 py-2 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-              Pricing
-            </Link>
-            <Link to="#" className="block px-4 py-2 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-              About
-            </Link>
+            {navbarLinks.map((link, idx) => (
+              <div key={idx}>
+                {link.dropdown ? (
+                  <div className="space-y-1">
+                    <p className="px-4 py-2 text-xs font-bold text-slate-400 uppercase tracking-widest">{link.label}</p>
+                    {link.dropdown.map((item, i) => (
+                      <Link
+                        key={i}
+                        to={item.route}
+                        className="block px-8 py-2 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <Link to={link.route} className="block px-4 py-2 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
+                    {link.label}
+                  </Link>
+                )}
+              </div>
+            ))}
             <div className="pt-4 border-t border-slate-200 space-y-3">
               <Link
                 to="/Login"
@@ -163,8 +140,6 @@ export default function Navbar() {
           </div>
         </div>
       )}
-
-
     </nav>
   );
 }
