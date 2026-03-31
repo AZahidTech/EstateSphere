@@ -1,7 +1,7 @@
 // app.js
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import authRoutes from './routes/auth.routes.js'; // ⚠️ include .js extension
+import authRoutes from './routes/auth.routes.js'; 
 
 const app = express();
 

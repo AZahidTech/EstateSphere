@@ -1,7 +1,7 @@
 // server.js
-import 'dotenv/config';             // Loads environment variables
-import app from './src/app.js';     // ⚠️ add .js extension
-import connectDB from './src/db/db.js'; // ⚠️ add .js extension
+import 'dotenv/config';             
+import app from './src/app.js';    
+import connectDB from './src/db/db.js'; 
 
 // Connect to MongoDB
 connectDB();
