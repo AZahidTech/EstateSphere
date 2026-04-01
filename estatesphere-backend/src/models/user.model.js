@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema(
       required: [true, "Password is required"],
       minlength: 8,
     },
+    provider: {
+      type: String,
+      enum: ["local", "google"],
+      default: "local",
+    },
 
     role: {
       type: String,
@@ -35,7 +40,7 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 userSchema.pre("save", async function () {
@@ -43,7 +48,6 @@ userSchema.pre("save", async function () {
 
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
-
 });
 
 //  Compare password

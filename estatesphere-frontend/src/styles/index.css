@@ -56,7 +56,7 @@
 
     /* Table data row — same components */
     .dash-table-row {
-        @apply grid gap-2.5 items-center py-[13px] border-b border-[#e9ecf3];
+        @apply grid gap-2.5 items-center py-3.25 border-b border-[#e9ecf3];
     }
 
     /* Status / tag badge — ClientNegotiations, DealerInquiries, AdminActivity */
