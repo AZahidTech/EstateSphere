@@ -1,5 +1,5 @@
 import React from "react";
-import walletIcon from "../../assets/svg/PricingFeatures/wallet.svg";
+import walletIcon from "../../assets/svg/pricingFeatures/wallet.svg";
 
 import { propertyAmenitiesList } from "../../data/index.jsx";
 
@@ -8,7 +8,6 @@ const PricingFeaturesDetails = () => {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 animate-in slide-in-from-right-4 duration-500">
-            {/* Financial Details */}
             <div className="space-y-6">
                 <div className="flex items-center gap-3 mb-8">
                     <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
@@ -54,7 +53,6 @@ const PricingFeaturesDetails = () => {
                 </div>
             </div>
 
-            {/* Amenities & Features */}
             <div className="space-y-6">
                 <div className="flex items-center gap-3 mb-8">
                     <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">

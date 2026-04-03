@@ -1,9 +1,9 @@
 import React from "react";
 import AdminTopbar from "../components/superAdminDashboard/AdminTopbar"; // Reuse topbar
-import ComplaintHeader from "../components/ComplaintDetail/ComplaintHeader";
-import ComplaintMainInfo from "../components/ComplaintDetail/ComplaintMainInfo";
-import ComplaintSidebar from "../components/ComplaintDetail/ComplaintSidebar";
-import ActivityHistory from "../components/ComplaintDetail/ActivityHistory";
+import ComplaintHeader from "../components/complaintDetail/ComplaintHeader";
+import ComplaintMainInfo from "../components/complaintDetail/ComplaintMainInfo";
+import ComplaintSidebar from "../components/complaintDetail/ComplaintSidebar";
+import ActivityHistory from "../components/complaintDetail/ActivityHistory";
 
 const ComplaintDetail = () => {
     return (

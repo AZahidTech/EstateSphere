@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import TwitterIcon from '../../assets/svg/Footer/TwitterIcon';
-import LinkedInIcon from '../../assets/svg/Footer/LinkedInIcon';
-import FacebookIcon from '../../assets/svg/Footer/FacebookIcon';
+import TwitterIcon from '../../assets/svg/footer/TwitterIcon';
+import LinkedInIcon from '../../assets/svg/footer/LinkedInIcon';
+import FacebookIcon from '../../assets/svg/footer/FacebookIcon';
 import { Link } from 'react-router-dom';
-import Logo_Without_Name from '../../assets/Logo/Logo_Without_Name.png';
+import Logo_Without_Name from '../../assets/logo/Logo_Without_Name.png';
 
 import { footerLinks } from '../../data/index.jsx';
 
@@ -12,7 +12,6 @@ export default function Footer() {
 
     const handleSubscribe = (e) => {
         e.preventDefault();
-        // Handle newsletter subscription
         console.log('Subscribing:', email);
         setEmail('');
     };

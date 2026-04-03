@@ -1,9 +1,9 @@
 import React from "react";
 import AdminSidebar from "../components/superAdminDashboard/AdminSidebar";
 import AdminTopbar from "../components/superAdminDashboard/AdminTopbar";
-import UserHeader from "../components/UserManagement/UserHeader";
-import UserStats from "../components/UserManagement/UserStats";
-import UserTable from "../components/UserManagement/UserTable";
+import UserHeader from "../components/userManagement/UserHeader";
+import UserStats from "../components/userManagement/UserStats";
+import UserTable from "../components/userManagement/UserTable";
 
 const UserManagement = () => {
     return (

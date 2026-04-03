@@ -8,8 +8,6 @@ const ReviewSubmitDetails = () => {
                 <h3 className="text-xl font-bold text-[#1e2535]">Review & Submit</h3>
                 <p className="text-[#7b8399] text-sm font-medium mt-1">Almost there! Please review your listing information before publishing it live.</p>
             </div>
-
-            {/* Preview Card */}
             <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col md:flex-row shadow-blue-500/5">
                 <div className="md:w-1/3 aspect-[4/3] md:aspect-auto">
                     <img
@@ -75,7 +73,6 @@ const ReviewSubmitDetails = () => {
                 </div>
             </div>
 
-            {/* Compliance */}
             <div className="space-y-3 pt-4">
                 <label className="flex items-center gap-3 cursor-pointer group">
                     <input type="checkbox" className="w-5 h-5 rounded-md border-gray-300 text-blue-600 focus:ring-blue-500/20" />

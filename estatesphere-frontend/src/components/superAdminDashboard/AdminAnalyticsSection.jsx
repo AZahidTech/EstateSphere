@@ -1,6 +1,7 @@
 import React from "react";
 import InfoIcon from "../../assets/svg/superAdmin/InfoIcon";
 import { adminAnalyticsData, adminSupportDistribution } from "../../data/index.jsx";
+import MoreVerticalIcon from "../../assets/svg/common/MoreVerticalIcon";
 
 const { months, actual, targets, maxVal } = adminAnalyticsData;
 const supportItems = adminSupportDistribution;
@@ -51,7 +52,7 @@ const AdminAnalyticsSection = () => {
                 <div className="flex items-center justify-between mb-6">
                     <h2 className="text-lg font-bold text-slate-800 tracking-tight">Support Tickets</h2>
                     <span className="p-1.5 bg-slate-50 rounded-lg text-slate-400 hover:text-slate-900 cursor-pointer transition-colors shadow-xs border border-slate-100">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg>
+                        <MoreVerticalIcon width="16" height="16" />
                     </span>
                 </div>
 
