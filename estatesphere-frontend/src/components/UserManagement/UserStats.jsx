@@ -2,7 +2,7 @@ import React from "react";
 import { userManagementStats } from "../../data/index.jsx";
 
 const StatCard = ({ title, value, icon, trend, trendValue, color, iconContent }) => (
-    <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-xl shadow-slate-100/50 hover:shadow-2xl transition-all duration-300 group">
+    <div className="group premium-stat-card">
         <div className="flex items-start justify-between mb-4">
             <div className={`w-14 h-14 rounded-2xl ${color} bg-opacity-10 flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
                 {iconContent || icon}

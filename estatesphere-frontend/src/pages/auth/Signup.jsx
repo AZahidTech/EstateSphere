@@ -1,6 +1,6 @@
 import React from 'react';
-import SignupHero from '../../components/SignupPage/SignupHero';
-import SignupForm from '../../components/SignupPage/SignupForm';
+import SignupHero from '../../components/signupPage/SignupHero';
+import SignupForm from '../../components/signupPage/SignupForm';
 
 export default function Signup() {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import successIcon from "../../assets/svg/SuccessState/success.svg";
+import successIcon from "../../assets/svg/successState/success.svg";
 
 const SuccessStateDetails = () => {
     return (
@@ -14,7 +14,6 @@ const SuccessStateDetails = () => {
                 Your property has been successfully listed and is now visible to clients.
             </p>
 
-            {/* Mini Listing Card */}
             <div className="mt-12 w-full max-w-sm bg-gray-50/50 border border-gray-100 rounded-2xl p-4 flex items-center gap-4 group hover:bg-white hover:shadow-xl transition-all duration-500">
                 <div className="w-20 h-20 rounded-xl overflow-hidden shadow-sm">
                     <img

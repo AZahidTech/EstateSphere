@@ -1,17 +1,22 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { adminNavItems } from "../../data/index.jsx";
+import DashboardIcon from "../../assets/svg/common/DashboardIcon";
 
 const navItems = adminNavItems;
 
 const AdminSidebar = () => {
     const location = useLocation();
+    const user = useSelector((state) => state.auth.user);
+    const fullName = user?.fullName || "Admin";
+    const initial = fullName.charAt(0).toUpperCase();
 
     return (
         <aside className="w-[200px] min-w-[200px] bg-white border-r border-[#e9ecf3] flex flex-col h-screen">
             <div className="flex items-center gap-2.5 px-5 py-[22px] border-b border-[#e9ecf3]">
                 <div className="w-9 h-9 rounded-[10px] bg-indigo-600 flex items-center justify-center flex-shrink-0">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>
+                    <DashboardIcon stroke="white" width="20" height="20" />
                 </div>
                 <span className="text-[15px] font-bold text-[#1e2535]">EstateSphere</span>
             </div>
@@ -42,9 +47,9 @@ const AdminSidebar = () => {
 
             <div className="px-5 py-4 border-t border-[#e9ecf3]">
                 <div className="flex items-center gap-2.5">
-                    <div className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">A</div>
+                    <div className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">{initial}</div>
                     <div className="overflow-hidden">
-                        <p className="text-[13px] font-semibold text-[#1e2535] truncate">Super Admin</p>
+                        <p className="text-[13px] font-semibold text-[#1e2535] truncate">{fullName}</p>
                         <p className="text-[11px] text-[#7b8399] truncate">Platform Control</p>
                     </div>
                 </div>

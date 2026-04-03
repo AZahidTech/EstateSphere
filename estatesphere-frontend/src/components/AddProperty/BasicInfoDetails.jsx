@@ -1,5 +1,5 @@
 import React from "react";
-import mapIcon from "../../assets/svg/BasicInfo/map.svg";
+import mapIcon from "../../assets/svg/basicInfo/map.svg";
 import { propertyTypes } from "../../data/index.jsx";
 
 const BasicInfoDetails = () => {

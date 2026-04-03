@@ -1,26 +1,36 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import EnvelopeIcon from "../../assets/svg/Auth/EnvelopeIcon";
-import LockIcon from "../../assets/svg/Auth/LockIcon";
-import EyeOpenIcon from "../../assets/svg/Auth/EyeOpenIcon";
-import EyeSlashIcon from "../../assets/svg/Auth/EyeSlashIcon";
-import GoogleIcon from "../../assets/svg/Auth/GoogleIcon";
-import AppleIcon from "../../assets/svg/Auth/AppleIcon";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { googleLogin, loginUser } from "../../redux/slices/auth/authThunks";
+import { setSelectedRole } from "../../redux/slices/auth/authSlice";
+import { getRoleDashboardPath } from "../../utils/features/functions";
+import RoleSelectionModal from "../roleSelectionModal/RoleSelectionModal";
+import EnvelopeIcon from "../../assets/svg/auth/EnvelopeIcon";
+import LockIcon from "../../assets/svg/auth/LockIcon";
+import EyeOpenIcon from "../../assets/svg/auth/EyeOpenIcon";
+import EyeSlashIcon from "../../assets/svg/auth/EyeSlashIcon";
+import GoogleIcon from "../../assets/svg/auth/GoogleIcon";
+import AppleIcon from "../../assets/svg/auth/AppleIcon";
 import { Link } from "react-router-dom";
 import { socialProviders } from "../../data/index.jsx";
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loading, error } = useSelector((state) => state.auth);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // Google OAuth
+  const [showRoleModal, setShowRoleModal] = useState(false);
+  const [availableRoles, setAvailableRoles] = useState([]);
+
   useEffect(() => {
-    /* global google */
     if (window.google) {
       google.accounts.id.initialize({
-        client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID, // your .env client ID
+        client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
         callback: handleGoogleResponse,
       });
 
@@ -29,35 +39,71 @@ export default function LoginForm() {
         {
           theme: "outline",
           size: "large",
-          width: 300, // Make iframe large enough to cover the button
+          width: 300,
         }
       );
     }
   }, []);
 
+  const handleRoleSelection = (role) => {
+    dispatch(setSelectedRole(role));
+    setShowRoleModal(false);
+    navigate(getRoleDashboardPath(role));
+  };
+
   const handleGoogleResponse = async (response) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/google", {
-        credential: response.credential,
-      });
+      const result = await dispatch(
+        googleLogin({ credential: response.credential, isSignup: false })
+      ).unwrap();
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-      alert(`Welcome ${res.data.user.fullName}!`);
+      const roles = result.user.roles || [result.user.role];
+
+      if (roles.length > 1) {
+        setAvailableRoles(roles);
+        setShowRoleModal(true);
+      } else {
+        const targetRole = roles[0];
+        dispatch(setSelectedRole(targetRole));
+        alert(`Welcome back, ${result.user.fullName}!`);
+        navigate(getRoleDashboardPath(targetRole));
+      }
     } catch (err) {
       console.error(err);
-      alert("Google login failed!");
+      alert(err || "Google login failed!");
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Login submitted:", { email, password, rememberMe });
+    try {
+      const result = await dispatch(loginUser({ email, password })).unwrap();
+
+      const roles = result.user.roles || [result.user.role];
+
+      if (roles.length > 1) {
+        setAvailableRoles(roles);
+        setShowRoleModal(true);
+      } else {
+        const targetRole = roles[0];
+        dispatch(setSelectedRole(targetRole));
+        alert(`Welcome back, ${result.user.fullName}!`);
+        navigate(getRoleDashboardPath(targetRole));
+      }
+    } catch (err) {
+      console.error(err);
+      alert(err || "Login failed. Please check your credentials.");
+    }
   };
 
   return (
     <div className="w-full lg:w-1/2 flex items-center justify-center px-8 py-12 bg-white">
+      {showRoleModal && (
+        <RoleSelectionModal
+          roles={availableRoles}
+          onSelect={handleRoleSelection}
+        />
+      )}
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="mb-10">
@@ -154,9 +200,20 @@ export default function LoginForm() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-4 bg-linear-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 hover:shadow-xl hover:shadow-indigo-600/40 hover:-translate-y-0.5 transition-all duration-300 focus:ring-4 focus:ring-indigo-600/20 outline-none"
+            disabled={loading}
+            className="w-full py-4 bg-linear-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 hover:shadow-xl hover:shadow-indigo-600/40 hover:-translate-y-0.5 transition-all duration-300 focus:ring-4 focus:ring-indigo-600/20 outline-none disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
           >
-            Sign In to Dashboard
+            {loading ? (
+              <span className="flex items-center justify-center gap-2">
+                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                </svg>
+                Signing In…
+              </span>
+            ) : (
+              "Sign In to Dashboard"
+            )}
           </button>
         </form>
 

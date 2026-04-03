@@ -1,5 +1,5 @@
 import React from "react";
-import uploadIcon from "../../assets/svg/MediaUpload/upload.svg";
+import uploadIcon from "../../assets/svg/mediaUpload/upload.svg";
 import { addPropertyUploadedFiles } from "../../data/index.jsx";
 
 const MediaUploadDetails = () => {
@@ -20,10 +20,10 @@ const MediaUploadDetails = () => {
                 <p className="text-[#7b8399] text-sm font-medium mt-1">Or click to browse from your computer</p>
 
                 <div className="flex gap-3 mt-6">
-                    <span className="px-3 py-1 bg-white border border-gray-200 rounded-lg text-[10px] font-bold text-gray-500 uppercase tracking-widest shadow-sm">JPG</span>
-                    <span className="px-3 py-1 bg-white border border-gray-200 rounded-lg text-[10px] font-bold text-gray-500 uppercase tracking-widest shadow-sm">PNG</span>
-                    <span className="px-3 py-1 bg-white border border-gray-200 rounded-lg text-[10px] font-bold text-gray-500 uppercase tracking-widest shadow-sm">MP4</span>
-                    <span className="px-3 py-1 bg-white border border-gray-200 rounded-lg text-[10px] font-bold text-blue-600 uppercase tracking-widest shadow-sm border-blue-100">MAX 20MB</span>
+                    <span className="capsule-badge">JPG</span>
+                    <span className="capsule-badge">PNG</span>
+                    <span className="capsule-badge">MP4</span>
+                    <span className="capsule-badge capsule-badge-blue">MAX 20MB</span>
                 </div>
             </div>
 

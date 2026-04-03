@@ -29,10 +29,15 @@ const userSchema = new mongoose.Schema(
       default: "local",
     },
 
+    roles: {
+      type: [String],
+      enum: ["Dealer", "Client", "SocietyOwner", "Resident", "SuperAdmin", "Owner"],
+      default: ["Client"],
+    },
+
+    // ⚠️ Legacy Field (For migration only)
     role: {
       type: String,
-      enum: ["Dealer", "Client", "SocietyOwner", "Resident", "SuperAdmin"],
-      default: "Client",
     },
 
     isVerified: {
@@ -40,7 +45,7 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
   },
-  { timestamps: true },
+  { timestamps: true, strict: false },
 );
 
 userSchema.pre("save", async function () {
