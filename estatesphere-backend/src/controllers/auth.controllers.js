@@ -1,19 +1,16 @@
 import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import { OAuth2Client } from "google-auth-library";
+import sendEmail from "../utils/sendEmail.js";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-// 🔐 Generate Token
 const generateToken = (user) => {
-  return jwt.sign(
-    { id: user._id, roles: user.roles },
-    process.env.JWT_SECRET,
-    { expiresIn: "7d" }
-  );
+  return jwt.sign({ id: user._id, roles: user.roles }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
 };
 
-// ✅ REGISTER
 export const registerUser = async (req, res) => {
   try {
     const { fullName, email, password, role } = req.body;
@@ -45,7 +42,6 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// ✅ LOGIN
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -55,29 +51,28 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    // 🔄 Legacy Migration: Ensure the old 'role' field is merged into the new 'roles' array
     if (user) {
-        const legacyRole = user.get('role'); // Get the old string role
-        let needsMigrationSave = false;
+      const legacyRole = user.get("role");
+      let needsMigrationSave = false;
 
-        if (!user.roles) {
-            user.roles = [];
-            needsMigrationSave = true;
-        }
+      if (!user.roles) {
+        user.roles = [];
+        needsMigrationSave = true;
+      }
 
-        if (legacyRole && !user.roles.includes(legacyRole)) {
-            user.roles.push(legacyRole);
-            needsMigrationSave = true;
-        }
+      if (legacyRole && !user.roles.includes(legacyRole)) {
+        user.roles.push(legacyRole);
+        needsMigrationSave = true;
+      }
 
-        if (user.roles.length === 0) {
-            user.roles = ["Client"];
-            needsMigrationSave = true;
-        }
+      if (user.roles.length === 0) {
+        user.roles = ["Client"];
+        needsMigrationSave = true;
+      }
 
-        if (needsMigrationSave) {
-            await user.save();
-        }
+      if (needsMigrationSave) {
+        await user.save();
+      }
     }
 
     if (user.provider === "google") {
@@ -106,7 +101,6 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// ✅ GOOGLE AUTH — handles both Signup and Login via isSignup flag
 export const googleAuth = async (req, res) => {
   try {
     const { credential, role, isSignup } = req.body;
@@ -125,52 +119,48 @@ export const googleAuth = async (req, res) => {
 
     let user = await User.findOne({ email });
 
-    // 🔄 Legacy Migration: Ensure the old 'role' field is merged into the new 'roles' array
     if (user) {
-        const legacyRole = user.role; // Read-only access to legacy string field
-        let needsMigrationSave = false;
+      const legacyRole = user.role;
+      let needsMigrationSave = false;
 
-        // Ensure roles is at least an empty array
-        if (!user.roles) {
-            user.roles = [];
-            needsMigrationSave = true;
-        }
+      if (!user.roles) {
+        user.roles = [];
+        needsMigrationSave = true;
+      }
 
-        // If legacyRole exists and isn't in the new roles array yet, add it
-        if (legacyRole && !user.roles.includes(legacyRole)) {
-            user.roles.push(legacyRole);
-            needsMigrationSave = true;
-        }
-        
-        // Fallback: If roles is still empty, add default
-        if (user.roles.length === 0) {
-            user.roles = ["Client"];
-            needsMigrationSave = true;
-        }
+      if (legacyRole && !user.roles.includes(legacyRole)) {
+        user.roles.push(legacyRole);
+        needsMigrationSave = true;
+      }
 
-        if (needsMigrationSave) {
-            await user.save();
-        }
+      if (user.roles.length === 0) {
+        user.roles = ["Client"];
+        needsMigrationSave = true;
+      }
+
+      if (needsMigrationSave) {
+        await user.save();
+      }
     }
 
     if (isSignup) {
-      // ── SIGNUP PATH ──────────────────────────────────────────────
       if (user) {
         let rolesWasModified = false;
-        
+
         if (role && !user.roles.includes(role)) {
           user.roles.push(role);
           rolesWasModified = true;
         }
-        
+
         if (rolesWasModified) {
           await user.save();
         }
-        
+
         return res.status(200).json({
-          message: role && !user.roles.includes(role) 
-            ? `New role "${role}" added to your account!` 
-            : "Logging you into your account.",
+          message:
+            role && !user.roles.includes(role)
+              ? `New role "${role}" added to your account!`
+              : "Logging you into your account.",
           token: generateToken(user),
           user: {
             id: user._id,
@@ -182,10 +172,11 @@ export const googleAuth = async (req, res) => {
       }
 
       if (!role) {
-        return res.status(400).json({ message: "Please select a role before signing up." });
+        return res
+          .status(400)
+          .json({ message: "Please select a role before signing up." });
       }
 
-      // ✅ Create brand-new user with chosen role
       user = await User.create({
         fullName: name,
         email,
@@ -205,31 +196,28 @@ export const googleAuth = async (req, res) => {
           roles: user.roles,
         },
       });
-
     } else {
-      // ── LOGIN PATH ───────────────────────────────────────────────
       if (!user) {
         // No account found → tell them to sign up first
         return res.status(404).json({
-          message: "No account found with this Google email. Please sign up first.",
+          message:
+            "No account found with this Google email. Please sign up first.",
         });
       }
 
       let userUpdated = false;
 
-      // If they originally registered locally, upgrade their provider to google
       if (user.provider === "local") {
         user.provider = "google";
         user.profilePic = picture;
         userUpdated = true;
       }
-      
-      // If a role was passed during login, make sure it's added
+
       if (role && !user.roles.includes(role)) {
-          user.roles.push(role);
-          userUpdated = true;
+        user.roles.push(role);
+        userUpdated = true;
       }
-      
+
       if (userUpdated) {
         await user.save();
       }
@@ -245,12 +233,101 @@ export const googleAuth = async (req, res) => {
         },
       });
     }
-
   } catch (error) {
     console.error("Google auth error DETAILS:", error);
-    res.status(500).json({ 
+    res.status(500).json({
       message: "Google authentication failed. Please try again.",
-      error: error.message 
+      error: error.message,
     });
+  }
+};
+
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "User not found with this email" });
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    user.resetPasswordOTP = otp;
+    user.resetPasswordExpires = Date.now() + 10 * 60 * 1000;
+    await user.save();
+
+    const message = `Your EstateSphere password reset OTP is: ${otp}. This code is valid for 10 minutes.`;
+
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: "Password Reset OTP - EstateSphere",
+        message,
+      });
+
+      res.status(200).json({ message: "OTP sent to your email" });
+    } catch (error) {
+      user.resetPasswordOTP = undefined;
+      user.resetPasswordExpires = undefined;
+      await user.save();
+      console.error("Email error:", error);
+      res.status(500).json({ message: "Email could not be sent" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const verifyOTP = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    const user = await User.findOne({
+      email,
+      resetPasswordOTP: otp,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid or expired OTP" });
+    }
+
+    res
+      .status(200)
+      .json({
+        message: "OTP verified successfully. You can now reset your password.",
+      });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { email, otp, newPassword } = req.body;
+
+    const user = await User.findOne({
+      email,
+      resetPasswordOTP: otp,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: "Invalid or expired OTP. Please request a new one." });
+    }
+
+    user.password = newPassword;
+    user.resetPasswordOTP = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

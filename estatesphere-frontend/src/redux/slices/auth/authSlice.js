@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { googleLogin, loginUser } from "./authThunks";
+import { googleLogin, loginUser, forgotPasswordThunk, verifyOTPThunk, resetPasswordThunk } from "./authThunks";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
@@ -7,6 +7,7 @@ const initialState = {
   selectedRole: localStorage.getItem("selectedRole") || null,
   loading: false,
   error: null,
+  otpStatus: 'idle', // 'idle' | 'sending' | 'sent' | 'verifying' | 'verified' | 'resetting' | 'reset-success'
 };
 
 const authSlice = createSlice({
@@ -26,6 +27,10 @@ const authSlice = createSlice({
       localStorage.setItem("selectedRole", action.payload);
     },
     clearError: (state) => {
+      state.error = null;
+    },
+    resetOtpStatus: (state) => {
+      state.otpStatus = 'idle';
       state.error = null;
     },
   },
@@ -65,10 +70,58 @@ const authSlice = createSlice({
       .addCase(googleLogin.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+
+      // Forgot Password
+      .addCase(forgotPasswordThunk.pending, (state) => {
+        state.loading = true;
+        state.otpStatus = 'sending';
+        state.error = null;
+      })
+      .addCase(forgotPasswordThunk.fulfilled, (state) => {
+        state.loading = false;
+        state.otpStatus = 'sent';
+      })
+      .addCase(forgotPasswordThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.otpStatus = 'idle';
+        state.error = action.payload;
+      })
+
+      // Verify OTP
+      .addCase(verifyOTPThunk.pending, (state) => {
+        state.loading = true;
+        state.otpStatus = 'verifying';
+        state.error = null;
+      })
+      .addCase(verifyOTPThunk.fulfilled, (state) => {
+        state.loading = false;
+        state.otpStatus = 'verified';
+      })
+      .addCase(verifyOTPThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.otpStatus = 'sent';
+        state.error = action.payload;
+      })
+
+      // Reset Password
+      .addCase(resetPasswordThunk.pending, (state) => {
+        state.loading = true;
+        state.otpStatus = 'resetting';
+        state.error = null;
+      })
+      .addCase(resetPasswordThunk.fulfilled, (state) => {
+        state.loading = false;
+        state.otpStatus = 'reset-success';
+      })
+      .addCase(resetPasswordThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.otpStatus = 'verified';
+        state.error = action.payload;
       });
   },
 });
 
-export const { logout, setSelectedRole, clearError } = authSlice.actions;
+export const { logout, setSelectedRole, clearError, resetOtpStatus } = authSlice.actions;
 
 export default authSlice.reducer;

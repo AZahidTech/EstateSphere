@@ -12,6 +12,10 @@ import UserManagement from "../pages/UserManagement";
 import ComplaintsManagement from "../pages/ComplaintsManagement";
 import ComplaintDetail from "../pages/ComplaintDetail";
 import Messages from "../pages/Messages";
+import AddProperty from "../pages/AddProperty";
+import Properties from "../pages/Properties";
+import ProtectedRoute from "./ProtectedRoute";
+
 const AppRoutes = () => {
   return (
     <Routes>
@@ -27,6 +31,10 @@ const AppRoutes = () => {
       <Route path="/ForgotPassword" element={<ForgotPassword />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/Signup" element={<Signup />} />
+      <Route element={<ProtectedRoute allowedRoles={["Dealer", "SocietyOwner"]} />}>
+      <Route path="/add-property" element={<AddProperty />} />
+      </Route>
+      <Route path="/Properties" element={<Properties />} />
       <Route path="/" element={<LandingPage />} />
     </Routes>
   );

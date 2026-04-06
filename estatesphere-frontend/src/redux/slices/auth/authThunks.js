@@ -55,3 +55,39 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
+export const forgotPasswordThunk = createAsyncThunk(
+  "auth/forgotPassword",
+  async (email, { rejectWithValue }) => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/auth/forgot-password", { email });
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || err.message || "Failed to send OTP");
+    }
+  }
+);
+
+export const verifyOTPThunk = createAsyncThunk(
+  "auth/verifyOTP",
+  async ({ email, otp }, { rejectWithValue }) => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/auth/verify-otp", { email, otp });
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || err.message || "Invalid OTP");
+    }
+  }
+);
+
+export const resetPasswordThunk = createAsyncThunk(
+  "auth/resetPassword",
+  async ({ email, otp, newPassword }, { rejectWithValue }) => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/auth/reset-password", { email, otp, newPassword });
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || err.message || "Failed to reset password");
+    }
+  }
+);

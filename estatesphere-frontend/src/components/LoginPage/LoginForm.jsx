@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { googleLogin, loginUser } from "../../redux/slices/auth/authThunks";
@@ -10,7 +10,6 @@ import LockIcon from "../../assets/svg/auth/LockIcon";
 import EyeOpenIcon from "../../assets/svg/auth/EyeOpenIcon";
 import EyeSlashIcon from "../../assets/svg/auth/EyeSlashIcon";
 import GoogleIcon from "../../assets/svg/auth/GoogleIcon";
-import AppleIcon from "../../assets/svg/auth/AppleIcon";
 import { Link } from "react-router-dom";
 import { socialProviders } from "../../data/index.jsx";
 
@@ -27,21 +26,28 @@ export default function LoginForm() {
   const [showRoleModal, setShowRoleModal] = useState(false);
   const [availableRoles, setAvailableRoles] = useState([]);
 
+  const googleInitialized = useRef(false);
+
   useEffect(() => {
     if (window.google) {
-      google.accounts.id.initialize({
-        client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-        callback: handleGoogleResponse,
-      });
+      if (!googleInitialized.current) {
+        google.accounts.id.initialize({
+          client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+          callback: handleGoogleResponse,
+        });
+        googleInitialized.current = true;
+      }
 
       google.accounts.id.renderButton(
-        document.getElementById("google-signin-button"),
+        document.getElementById("googleSignInDiv"),
         {
           theme: "outline",
           size: "large",
-          width: 300,
+          width: "400",
+          shape: "rectangular",
         }
       );
+      console.log("Google Sign-In button (Login) rendered.");
     }
   }, []);
 
@@ -105,7 +111,6 @@ export default function LoginForm() {
         />
       )}
       <div className="w-full max-w-md">
-        {/* Header */}
         <div className="mb-10">
           <h2 className="text-4xl font-bold text-slate-900 mb-3">
             Welcome back
@@ -115,9 +120,7 @@ export default function LoginForm() {
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Email Field */}
           <div>
             <label
               htmlFor="email"
@@ -141,7 +144,6 @@ export default function LoginForm() {
             </div>
           </div>
 
-          {/* Password Field */}
           <div>
             <label
               htmlFor="password"
@@ -176,7 +178,6 @@ export default function LoginForm() {
             </div>
           </div>
 
-          {/* Remember Me & Forgot Password */}
           <div className="flex items-center justify-between">
             <label className="flex items-center cursor-pointer group">
               <input
@@ -197,7 +198,6 @@ export default function LoginForm() {
             </Link>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
@@ -217,7 +217,6 @@ export default function LoginForm() {
           </button>
         </form>
 
-        {/* Divider */}
         <div className="relative my-8">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-slate-200"></div>
@@ -229,32 +228,23 @@ export default function LoginForm() {
           </div>
         </div>
 
-        {/* Social Login Buttons */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="mb-6">
           {socialProviders.map((provider, idx) => (
-            <div key={idx} className="relative w-full h-full rounded-xl overflow-hidden">
-              {/* Invisible Google Button Layer */}
-              {provider.provider === "google" && window.google && (
-                <div
-                  id="google-signin-button"
-                  className="absolute inset-0 z-20 cursor-pointer opacity-[0.01]"
-                  style={{ transform: "scale(1.5)", transformOrigin: "center" }}
-                ></div>
+            <div key={idx} className="relative w-full">
+              {provider.provider === "google" && (
+                <div className="relative w-full">
+                  <div className="w-full flex items-center justify-center gap-3 px-4 py-3.5 border-2 border-slate-200 rounded-xl bg-white hover:bg-slate-50 transition-all duration-200">
+                    <GoogleIcon className="w-5 h-5" />
+                    <span className="font-semibold text-slate-700">
+                      Google
+                    </span>
+                  </div>
+                  <div
+                    id="googleSignInDiv"
+                    className="absolute inset-0 z-20 opacity-[0.01] cursor-pointer [&>div]:w-full [&>div]:h-full"
+                  ></div>
+                </div>
               )}
-              {/* Custom Visable Button */}
-              <button
-                type="button"
-                className="w-full flex items-center justify-center gap-3 px-4 py-3.5 border-2 border-slate-200 rounded-xl hover:border-slate-300 hover:bg-slate-50 transition-all duration-200 group relative z-10"
-              >
-                {provider.provider === "google" ? (
-                  <GoogleIcon className="w-5 h-5" />
-                ) : (
-                  <AppleIcon className="w-5 h-5" />
-                )}
-                <span className="font-semibold text-slate-700 group-hover:text-slate-900">
-                  {provider.name}
-                </span>
-              </button>
             </div>
           ))}
         </div>

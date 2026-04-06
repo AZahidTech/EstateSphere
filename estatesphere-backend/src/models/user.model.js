@@ -31,11 +31,17 @@ const userSchema = new mongoose.Schema(
 
     roles: {
       type: [String],
-      enum: ["Dealer", "Client", "SocietyOwner", "Resident", "SuperAdmin", "Owner"],
+      enum: [
+        "Dealer",
+        "Client",
+        "SocietyOwner",
+        "Resident",
+        "SuperAdmin",
+        "Owner",
+      ],
       default: ["Client"],
     },
 
-    // ⚠️ Legacy Field (For migration only)
     role: {
       type: String,
     },
@@ -43,6 +49,13 @@ const userSchema = new mongoose.Schema(
     isVerified: {
       type: Boolean,
       default: false,
+    },
+
+    resetPasswordOTP: {
+      type: String,
+    },
+    resetPasswordExpires: {
+      type: Date,
     },
   },
   { timestamps: true, strict: false },

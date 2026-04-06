@@ -33,27 +33,36 @@ export default function SignupForm() {
         formDataRef.current = formData;
     }, [formData]);
 
-    useEffect(() => {
-        /* global google */
-        if (window.google) {
-            google.accounts.id.initialize({
-                client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-                callback: handleGoogleResponse,
-            });
+    const googleInitialized = useRef(false);
 
-            const btnContainer = document.getElementById("google-signup-button");
-            if (btnContainer) {
-                google.accounts.id.renderButton(
-                    btnContainer,
-                    {
-                        theme: "outline",
-                        size: "large",
-                        width: 300,
-                    }
-                );
+    useEffect(() => {
+        if (window.google) {
+            if (!googleInitialized.current) {
+                google.accounts.id.initialize({
+                    client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+                    callback: handleGoogleResponse,
+                });
+                googleInitialized.current = true;
+            }
+
+            if (formData.role) {
+                const btnContainer = document.getElementById("googleSignUpDiv");
+                if (btnContainer) {
+                    google.accounts.id.renderButton(
+                        btnContainer,
+                        {
+                            theme: "outline",
+                            size: "large",
+                            width: "400",
+                            shape: "rectangular",
+                        }
+                    );
+                }
             }
         }
-    }, []);
+    }, [formData.role]);
+
+
 
     const handleRoleSelection = (role) => {
         dispatch(setSelectedRole(role));
@@ -138,40 +147,44 @@ export default function SignupForm() {
 
     return (
         <div className="w-full lg:w-1/2 flex items-center justify-center px-8 py-12 bg-white overflow-y-auto">
+            {showRoleModal && (
+                <RoleSelectionModal
+                    roles={availableRoles}
+                    onSelect={handleRoleSelection}
+                />
+            )}
             <div className="w-full max-w-md">
                 <div className="mb-8">
                     <h2 className="text-3xl font-bold text-slate-900 mb-2">Get Started</h2>
                     <p className="text-slate-500">Create your EstateSphere account today.</p>
                 </div>
 
-                {/* Social Signup */}
-                <div className="relative w-full rounded-xl overflow-hidden mb-6">
-                    {/* Invisible Google iframe on top of our custom button */}
-                    <div
-                        id="google-signup-button"
-                        className="absolute inset-0 z-20 cursor-pointer opacity-[0.01]"
-                        style={{ transform: "scale(1.5)", transformOrigin: "center" }}
-                    ></div>
+                <div className="relative w-full mb-6 min-h-[54px]">
+                    {formData.role ? (
+                        <div className="relative w-full h-full animate-in fade-in duration-300">
+                            <div className="w-full flex items-center justify-center gap-3 px-4 py-3.5 border-2 border-slate-200 rounded-xl bg-white hover:bg-slate-50 transition-all duration-200">
+                                <GoogleIcon className="w-5 h-5" />
+                                <span className="font-semibold text-slate-700">
+                                    Google
+                                </span>
+                            </div>
 
-                    {/* Transparent overlay that blocks clicks until a role is selected */}
-                    {!formData.role && (
+                            <div
+                                id="googleSignUpDiv"
+                                className="absolute inset-0 z-20 opacity-[0.01] cursor-pointer [&>div]:w-full [&>div]:h-full"
+                            ></div>
+                        </div>
+                    ) : (
                         <div
-                            className="absolute inset-0 z-30 cursor-pointer"
-                            onClick={(e) => {
-                                e.stopPropagation();
+                            className="w-full flex items-center justify-center gap-3 px-4 py-3.5 border-2 border-dashed border-slate-200 rounded-xl bg-slate-50/50 cursor-pointer hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
+                            onClick={() => {
                                 alert("Please select a Role from the dropdown before signing up with Google.");
                             }}
-                        ></div>
+                        >
+                            <GoogleIcon className="w-5 h-5 grayscale opacity-50" />
+                            <span className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Select Role to Sign-up</span>
+                        </div>
                     )}
-
-                    {/* Custom Visible Button underneath */}
-                    <button
-                        type="button"
-                        className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors relative z-10"
-                    >
-                        <GoogleIcon className="w-5 h-5" />
-                        <span className="text-slate-700 font-medium">Sign up with Google</span>
-                    </button>
                 </div>
 
                 <div className="relative mb-6">
@@ -183,7 +196,6 @@ export default function SignupForm() {
                     </div>
                 </div>
 
-                {/* Form */}
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div>
                         <label className="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
@@ -235,7 +247,6 @@ export default function SignupForm() {
                             </button>
                         </div>
                         {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
-                        {/* Password Strength Indicator */}
                         {formData.password && (
                             <>
                                 <div className="flex gap-1 mt-2">

@@ -8,8 +8,6 @@ import SecurePaymentIcon from '../assets/svg/features/SecurePaymentIcon';
 import AnalyticsIcon from '../assets/svg/features/AnalyticsIcon';
 import CalendarBookingIcon from '../assets/svg/features/CalendarBookingIcon';
 import BellAlertIcon from '../assets/svg/features/BellAlertIcon';
-
-
 import CreditCardIcon from '../assets/svg/resident/CreditCardIcon';
 import AlertCircleIcon from '../assets/svg/resident/AlertCircleIcon';
 import ResUsersIcon from '../assets/svg/resident/UsersIcon';
@@ -19,8 +17,6 @@ import SocietyIcon from '../assets/svg/superAdmin/SocietyIcon';
 import ActiveResidentsIcon from '../assets/svg/superAdmin/ActiveResidentsIcon';
 import TicketIcon from '../assets/svg/superAdmin/TicketIcon';
 import RevenueIcon from '../assets/svg/superAdmin/RevenueIcon';
-
-
 import MailIcon from '../assets/svg/client/MailIcon';
 import CalendarIcon from '../assets/svg/client/CalendarIcon';
 import HeartIcon from '../assets/svg/client/HeartIcon';
@@ -33,18 +29,14 @@ import MultiBuildingIcon from '../assets/svg/common/MultiBuildingIcon';
 import AlertTriangleIcon from '../assets/svg/common/AlertTriangleIcon';
 import UsersCircleIcon from '../assets/svg/common/UsersCircleIcon';
 import VaultIcon from '../assets/svg/common/VaultIcon';
-
 import SocietyOwnerRoleIcon from '../assets/svg/roles/SocietyOwnerRoleIcon';
 import DealerRoleIcon from '../assets/svg/roles/DealerRoleIcon';
 import ResidentRoleIcon from '../assets/svg/roles/ResidentRoleIcon';
 import ClientRoleIcon from '../assets/svg/roles/ClientRoleIcon';
-
-
 import BuildingIcon from '../assets/svg/dealer/BuildingIcon';
 import UserPlusIcon from '../assets/svg/dealer/UserPlusIcon';
 import CheckBadgeIcon from '../assets/svg/dealer/CheckBadgeIcon';
 import DollarIcon from '../assets/svg/dealer/DollarIcon';
-
 
 export const clientStats = [
   { icon: <HeartIcon />, iconBg: "bg-indigo-50", iconColor: "text-indigo-600", label: "Saved Homes", value: "12" },
@@ -80,6 +72,7 @@ export const clientNavItems = [
   { icon: <CalendarIcon />, label: "Tour Requests", route: "/TourRequests" },
   { icon: <FileIcon />, label: "My Offers", route: "/MyOffers" },
   { icon: <MessageIcon />, label: "Messages", route: "/Messages" },
+  { icon: <SingleBuildingIcon />, label: "Browse Properties", route: "/Properties" },
 ];
 
 export const residentNavItems = [
@@ -89,29 +82,34 @@ export const residentNavItems = [
   { icon: <AlertTriangleIcon className="w-[17px] h-[17px]" />, label: "Complaints", route: "/ComplaintsManagement" },
   { icon: <UsersCircleIcon className="w-[17px] h-[17px]" />, label: "Visitors", route: "/Visitors" },
   { icon: <CreditCardIcon className="w-[17px] h-[17px]" />, label: "Payments", route: "/Payments" },
+  { icon: <SingleBuildingIcon className="w-[17px] h-[17px]" />, label: "Browse Properties", route: "/Properties" },
 ];
 
 export const dealerNavItems = [
   { icon: <DashboardIcon />, label: "Dashboard", route: "/Dealer" },
   { icon: <SingleBuildingIcon />, label: "My Listings", route: "/MyListings" },
+  { icon: <BuildingIcon />, label: "Add Property", route: "/add-property" },
   { icon: <UserPlusIcon />, label: "Leads", route: "/Leads" },
   { icon: <CalendarIcon />, label: "Client Meetings", route: "/Meetings" },
   { icon: <DollarIcon />, label: "Earnings", route: "/Earnings" },
+  { icon: <SingleBuildingIcon />, label: "Browse Properties", route: "/Properties" },
 ];
 
 export const societyOwnerNavItems = [
   { icon: <DashboardIcon className="w-[17px] h-[17px]" />, label: "Dashboard", route: "/SocietyOwner" },
   { icon: <SingleBuildingIcon className="w-[17px] h-[17px]" />, label: "My Property", route: "/MyProperty" },
+  { icon: <BuildingIcon className="w-[17px] h-[17px]" />, label: "Add Property", route: "/add-property" },
   { icon: <WrenchIcon className="w-[17px] h-[17px]" />, label: "Maintenance", route: "/Maintenance" },
   { icon: <AlertTriangleIcon className="w-[17px] h-[17px]" />, label: "Complaints", route: "/ComplaintsManagement" },
   { icon: <UsersCircleIcon className="w-[17px] h-[17px]" />, label: "Visitors", route: "/Visitors" },
   { icon: <VaultIcon className="w-[17px] h-[17px]" />, label: "Payments", route: "/Payments" },
+  { icon: <SingleBuildingIcon className="w-[17px] h-[17px]" />, label: "Browse Properties", route: "/Properties" },
 ];
 
 export const adminNavItems = [
   { icon: <DashboardIcon />, label: "Dashboard", route: "/SuperAdmin" },
   { icon: <MultiBuildingIcon />, label: "Societies", route: "/Societies" },
-  { icon: <SingleBuildingIcon />, label: "Properties", route: "/AddPropertyBasic" },
+  { icon: <SingleBuildingIcon />, label: "Properties", route: "/Properties" },
   { icon: <UsersCircleIcon />, label: "User Management", route: "/UserManagement" },
   { icon: <AlertTriangleIcon />, label: "Complaints", badge: "12", route: "/ComplaintsManagement" },
   { icon: <VaultIcon />, label: "Messages", route: "/Messages" },
@@ -137,6 +135,7 @@ export const navbarLinks = [
     ]
   },
   { label: "Pricing", route: "#" },
+  { label: "Properties", route: "/Properties" },
   { label: "About", route: "#" },
 ];
 
@@ -347,11 +346,10 @@ export const dashboardMockupChartData = [
   [70, 45], [80, 55], [75, 48]
 ];
 
-export const dashboardMockupActivities = [1, 2, 3]; // Used for demonstration mapping
+export const dashboardMockupActivities = [1, 2, 3];
 
 export const socialProviders = [
-  { name: "Google", provider: "google" },
-  { name: "Apple", provider: "apple" }
+  { name: "Google", provider: "google" }
 ];
 
 export const residentQuickActions = [
@@ -359,7 +357,7 @@ export const residentQuickActions = [
     title: "Maintenance Request",
     desc: "Report issues in your unit or common areas for quick resolution.",
     btnText: "Raise Request",
-    theme: "dark", // or 'light'
+    theme: "dark",
     iconType: "wrench"
   },
   {

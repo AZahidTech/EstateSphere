@@ -8,7 +8,6 @@ import ActivityHistory from "../components/complaintDetail/ActivityHistory";
 const ComplaintDetail = () => {
     return (
         <div className="flex h-screen overflow-hidden bg-[#f5f7fb] font-sans">
-            {/* Assuming a simpler layout for detail common in apps where sidebar might be collapsed or hidden */}
             <div className="flex-1 flex flex-col overflow-hidden">
                 <AdminTopbar />
                 <div className="flex-1 overflow-y-auto px-10 py-8">
