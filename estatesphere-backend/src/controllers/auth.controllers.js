@@ -198,7 +198,6 @@ export const googleAuth = async (req, res) => {
       });
     } else {
       if (!user) {
-        // No account found → tell them to sign up first
         return res.status(404).json({
           message:
             "No account found with this Google email. Please sign up first.",

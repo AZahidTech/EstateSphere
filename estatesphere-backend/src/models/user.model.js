@@ -5,23 +5,21 @@ const userSchema = new mongoose.Schema(
   {
     fullName: {
       type: String,
-      required: [true, "Full name is required"],
+      required: true,
       trim: true,
     },
 
     email: {
       type: String,
-      required: [true, "Email is required"],
+      required: true,
       unique: true,
       lowercase: true,
       trim: true,
-      match: [/^\S+@\S+\.\S+$/, "Please use a valid email"],
     },
 
     password: {
       type: String,
-      required: [true, "Password is required"],
-      minlength: 8,
+      required: true,
     },
     provider: {
       type: String,
