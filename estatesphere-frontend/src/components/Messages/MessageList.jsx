@@ -1,5 +1,7 @@
 import React from "react";
 import { messageChats } from "../../data/index.jsx";
+import SearchIcon from "../../assets/svg/common/SearchIcon";
+import EditIcon from "../../assets/svg/common/EditIcon";
 
 const MessageList = () => {
     const chats = messageChats;
@@ -10,9 +12,7 @@ const MessageList = () => {
                 <div className="flex items-center justify-between mb-8">
                     <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Messages</h1>
                     <button className="bg-linear-to-r from-indigo-600 to-purple-600 w-10 h-10 rounded-2xl text-white flex items-center justify-center hover:shadow-lg hover:shadow-indigo-200 hover:-translate-y-0.5 transition-all duration-300 active:scale-95 shadow-md shadow-indigo-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                        </svg>
+                        <EditIcon className="w-5 h-5" />
                     </button>
                 </div>
 
@@ -22,9 +22,7 @@ const MessageList = () => {
                         placeholder="Search residents or staff..."
                         className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-12 py-3.5 text-sm text-slate-600 placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-indigo-600/5 focus:bg-white focus:border-indigo-600/20 transition-all duration-300"
                     />
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 absolute left-4 top-3.5 text-slate-300 group-focus-within:text-indigo-500 transition-colors">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
+                    <SearchIcon className="w-5 h-5 absolute left-4 top-3.5 text-slate-300 group-focus-within:text-indigo-500 transition-colors" />
                 </div>
             </div>
 

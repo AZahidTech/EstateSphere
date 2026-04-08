@@ -6,6 +6,7 @@ import ClientPropertyCards from "../components/clientDashboard/ClientPropertyCar
 import ClientUpcomingTours from "../components/clientDashboard/ClientUpcomingTours";
 import ClientNearbyMap from "../components/clientDashboard/ClientNearbyMap";
 import ClientNegotiations from "../components/clientDashboard/ClientNegotiations";
+import ClientSearchBar from "../components/clientSearchbar/ClientSearchBar";
 
 const ClientDashboard = () => {
   return (
@@ -28,6 +29,9 @@ const ClientDashboard = () => {
               </button>
             </div>
           </div>
+          
+          <ClientSearchBar />
+
           <ClientStatsRow />
           <div className="grid grid-cols-[1fr_310px] gap-[18px] items-start">
             <ClientPropertyCards />

@@ -1,6 +1,6 @@
 import React from 'react';
-import LoginHero from '../../components/LoginPage/LoginHero';
-import LoginForm from '../../components/LoginPage/LoginForm';
+import LoginHero from '../../components/loginPage/LoginHero';
+import LoginForm from '../../components/loginPage/LoginForm';
 
 export default function Login() {
   return (

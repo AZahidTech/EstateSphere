@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import GoogleIcon from '../../assets/svg/Auth/GoogleIcon';
-import EyeSlashIcon from '../../assets/svg/Auth/EyeSlashIcon';
-import EyeOpenIcon from '../../assets/svg/Auth/EyeOpenIcon';
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { googleLogin, registerUser } from '../../redux/slices/auth/authThunks';
+import { logout, setSelectedRole } from '../../redux/slices/auth/authSlice';
+import { validateSignupForm, getPasswordStrength, runTimeValidation, getRoleDashboardPath } from '../../utils/features/functions';
+import RoleSelectionModal from '../roleSelectionModal/RoleSelectionModal';
+import GoogleIcon from '../../assets/svg/auth/GoogleIcon';
+import EyeSlashIcon from '../../assets/svg/auth/EyeSlashIcon';
+import EyeOpenIcon from '../../assets/svg/auth/EyeOpenIcon';
 import ChevronDownIcon from '../../assets/svg/common/ChevronDownIcon';
 import { signupRoles } from '../../data/index.jsx';
 
 export default function SignupForm() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
@@ -17,69 +25,109 @@ export default function SignupForm() {
     const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
 
-    const validateForm = () => {
-        const newErrors = {};
+    const [showRoleModal, setShowRoleModal] = useState(false);
+    const [availableRoles, setAvailableRoles] = useState([]);
 
-        // Full Name Validation
-        if (formData.fullName.length < 3) {
-            newErrors.fullName = 'Name must be at least 3 characters long';
-        } else if (formData.fullName.length > 50) {
-            newErrors.fullName = 'Name must be less than 50 characters';
+    const formDataRef = useRef(formData);
+    useEffect(() => {
+        formDataRef.current = formData;
+    }, [formData]);
+
+    const googleInitialized = useRef(false);
+
+    useEffect(() => {
+        if (window.google) {
+            if (!googleInitialized.current) {
+                google.accounts.id.initialize({
+                    client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+                    callback: handleGoogleResponse,
+                });
+                googleInitialized.current = true;
+            }
+
+            if (formData.role) {
+                const btnContainer = document.getElementById("googleSignUpDiv");
+                if (btnContainer) {
+                    google.accounts.id.renderButton(
+                        btnContainer,
+                        {
+                            theme: "outline",
+                            size: "large",
+                            width: "400",
+                            shape: "rectangular",
+                        }
+                    );
+                }
+            }
         }
+    }, [formData.role]);
 
-        // Email Validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.email)) {
-            newErrors.email = 'Please enter a valid email address';
-        }
 
-        // Password Validation
-        if (formData.password.length <= 8) {
-            newErrors.password = 'Password must be greater than 8 characters';
-        } else if (formData.password.length >= 20) {
-            newErrors.password = 'Password must be less than 20 characters';
-        }
 
-        // Role Validation
-        if (!formData.role) {
-            newErrors.role = 'Please select a role';
-        }
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+    const handleRoleSelection = (role) => {
+        dispatch(setSelectedRole(role));
+        setShowRoleModal(false);
+        navigate(getRoleDashboardPath(role));
     };
 
-    const handleSubmit = (e) => {
+    const handleGoogleResponse = async (response) => {
+        const selectedRole = formDataRef.current.role;
+
+        if (!selectedRole) {
+            alert("Please select a Role from the dropdown before signing up with Google.");
+            return;
+        }
+
+        try {
+            const result = await dispatch(
+                googleLogin({ credential: response.credential, role: selectedRole, isSignup: true })
+            ).unwrap();
+
+            alert(`${result.message || "Account updated!"} Please log in to access your dashboard.`);
+            dispatch(logout());
+            navigate("/Login");
+        } catch (err) {
+            if (err && (err.includes("already exists") || err.includes("log in instead"))) {
+                try {
+                    const retryResult = await dispatch(
+                        googleLogin({ credential: response.credential, role: selectedRole, isSignup: false })
+                    ).unwrap();
+
+                    alert(`${retryResult.message || "Role added!"} Please log in to access your dashboard.`);
+                    dispatch(logout());
+                    navigate("/Login");
+                } catch (retryErr) {
+                    console.error(retryErr);
+                    alert(retryErr || "Google authentication failed!");
+                }
+            } else {
+                console.error(err);
+                alert(err || "Google signup failed!");
+            }
+        }
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validateForm()) {
-            console.log('Form submitted:', formData);
-            // Proceed with signup logic
-        }
-    };
+        const newErrors = validateSignupForm(formData);
+        setErrors(newErrors);
 
-    const getPasswordStrength = (password) => {
-        let score = 0;
-        if (password.length > 5) score++;
-        if (password.length > 8) score++;
-        if (/[A-Z]/.test(password)) score++;
-        if (/[0-9]/.test(password)) score++;
-        if (/[^A-Za-z0-9]/.test(password)) score++;
+        if (Object.keys(newErrors).length === 0) {
+            try {
+                const result = await dispatch(registerUser({
+                    fullName: formData.fullName,
+                    email: formData.email,
+                    password: formData.password,
+                    role: formData.role
+                })).unwrap();
 
-        // Cap score at 4
-        if (score > 4) score = 4;
-
-        switch (score) {
-            case 0:
-            case 1:
-                return { score: 1, label: 'WEAK', color: 'bg-red-500', textColor: 'text-red-500' };
-            case 2:
-                return { score: 2, label: 'FAIR', color: 'bg-orange-500', textColor: 'text-orange-500' };
-            case 3:
-                return { score: 3, label: 'MODERATE', color: 'bg-blue-500', textColor: 'text-blue-500' };
-            case 4:
-                return { score: 4, label: 'STRONG', color: 'bg-green-500', textColor: 'text-green-500' };
-            default:
-                return { score: 0, label: '', color: 'bg-slate-200', textColor: 'text-slate-400' };
+                alert(result.message || "Registration successful! Please log in.");
+                dispatch(logout());
+                navigate("/Login");
+            } catch (err) {
+                console.error(err);
+                alert(err || "Registration failed!");
+            }
         }
     };
 
@@ -92,44 +140,52 @@ export default function SignupForm() {
             [name]: newValue
         });
 
-        // Runtime Validation
-        let newError = '';
-        if (name === 'fullName') {
-            if (newValue.length > 0 && newValue.length < 3) newError = 'Name must be at least 3 characters long';
-            if (newValue.length > 50) newError = 'Name must be less than 50 characters';
-        }
-        if (name === 'email') {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            // Only show email error if length > 0 and it's invalid
-            // To avoid annoyance, maybe check length > 5 or just strict regex
-            if (newValue.length > 0 && !emailRegex.test(newValue)) newError = 'Please enter a valid email address';
-        }
-        if (name === 'password') {
-            if (newValue.length > 0) {
-                if (newValue.length <= 8) newError = 'Password must be greater than 8 characters';
-                if (newValue.length >= 20) newError = 'Password must be less than 20 characters';
-            }
-        }
-        if (name === 'role') {
-            if (!newValue) newError = 'Please select a role';
-        }
+        const newError = runTimeValidation(name, newValue);
 
         setErrors(prev => ({ ...prev, [name]: newError }));
     };
 
     return (
         <div className="w-full lg:w-1/2 flex items-center justify-center px-8 py-12 bg-white overflow-y-auto">
+            {showRoleModal && (
+                <RoleSelectionModal
+                    roles={availableRoles}
+                    onSelect={handleRoleSelection}
+                />
+            )}
             <div className="w-full max-w-md">
                 <div className="mb-8">
                     <h2 className="text-3xl font-bold text-slate-900 mb-2">Get Started</h2>
                     <p className="text-slate-500">Create your EstateSphere account today.</p>
                 </div>
 
-                {/* Social Signup */}
-                <button className="w-full flex items-center justify-center gap-3 px-4 py-3 mb-6 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors">
-                    <GoogleIcon className="w-5 h-5" />
-                    <span className="text-slate-700 font-medium">Sign up with Google</span>
-                </button>
+                <div className="relative w-full mb-6 min-h-[54px]">
+                    {formData.role ? (
+                        <div className="relative w-full h-full animate-in fade-in duration-300">
+                            <div className="w-full flex items-center justify-center gap-3 px-4 py-3.5 border-2 border-slate-200 rounded-xl bg-white hover:bg-slate-50 transition-all duration-200">
+                                <GoogleIcon className="w-5 h-5" />
+                                <span className="font-semibold text-slate-700">
+                                    Google
+                                </span>
+                            </div>
+
+                            <div
+                                id="googleSignUpDiv"
+                                className="absolute inset-0 z-20 opacity-[0.01] cursor-pointer [&>div]:w-full [&>div]:h-full"
+                            ></div>
+                        </div>
+                    ) : (
+                        <div
+                            className="w-full flex items-center justify-center gap-3 px-4 py-3.5 border-2 border-dashed border-slate-200 rounded-xl bg-slate-50/50 cursor-pointer hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
+                            onClick={() => {
+                                alert("Please select a Role from the dropdown before signing up with Google.");
+                            }}
+                        >
+                            <GoogleIcon className="w-5 h-5 grayscale opacity-50" />
+                            <span className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Select Role to Sign-up</span>
+                        </div>
+                    )}
+                </div>
 
                 <div className="relative mb-6">
                     <div className="absolute inset-0 flex items-center">
@@ -140,7 +196,6 @@ export default function SignupForm() {
                     </div>
                 </div>
 
-                {/* Form */}
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div>
                         <label className="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
@@ -192,7 +247,6 @@ export default function SignupForm() {
                             </button>
                         </div>
                         {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
-                        {/* Password Strength Indicator */}
                         {formData.password && (
                             <>
                                 <div className="flex gap-1 mt-2">

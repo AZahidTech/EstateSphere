@@ -1,6 +1,6 @@
 import React from "react";
 import ArrowRightIcon from '../../assets/svg/common/ArrowRightIcon';
-import PlayCircleIcon from '../../assets/svg/Hero/PlayCircleIcon';
+import PlayCircleIcon from '../../assets/svg/hero/PlayCircleIcon';
 import { trustedSocieties } from "../../data/index.jsx";
 export default function Hero() {
   return (

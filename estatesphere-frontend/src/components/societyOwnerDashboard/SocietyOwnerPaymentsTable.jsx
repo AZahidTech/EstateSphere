@@ -38,7 +38,7 @@ const SocietyOwnerPaymentsTable = () => (
                                 {p.unit}
                             </td>
                             <td className="px-6 py-5 border-y border-slate-50 group-hover:border-slate-100 transition-all">
-                                <span className="text-[10px] font-bold px-3 py-1 bg-white border border-slate-200 text-slate-400 uppercase tracking-widest rounded-md">{p.type}</span>
+                                <span className="capsule-badge">{p.type}</span>
                             </td>
                             <td className="px-6 py-5 border-y border-slate-50 group-hover:border-slate-100 transition-all">
                                 <span className="text-sm font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-100">{p.amount}</span>

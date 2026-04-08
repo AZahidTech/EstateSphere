@@ -1,9 +1,9 @@
-import Navbar from "../components/Common/Navbar";
-import Footer from "../components/Common/Footer";
-import Hero from "../components/Landing/Hero";
-import Features from "../components/Landing/Features";
-import DashboardMockup from "../components/Landing/DashboardMockup";
-import Pricing from "../components/Landing/Pricing";
+import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
+import Hero from "../components/landing/Hero";
+import Features from "../components/landing/Features";
+import DashboardMockup from "../components/landing/DashboardMockup";
+import Pricing from "../components/landing/Pricing";
 
 export default function LandingPage() {
   return (

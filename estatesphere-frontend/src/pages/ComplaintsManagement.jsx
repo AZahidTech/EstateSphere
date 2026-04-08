@@ -1,9 +1,9 @@
 import React from "react";
 import AdminSidebar from "../components/superAdminDashboard/AdminSidebar";
 import AdminTopbar from "../components/superAdminDashboard/AdminTopbar";
-import ComplaintsHeader from "../components/ComplaintsManagement/ComplaintsHeader";
-import ComplaintsStats from "../components/ComplaintsManagement/ComplaintsStats";
-import ComplaintsTable from "../components/ComplaintsManagement/ComplaintsTable";
+import ComplaintsHeader from "../components/complaintsManagement/ComplaintsHeader";
+import ComplaintsStats from "../components/complaintsManagement/ComplaintsStats";
+import ComplaintsTable from "../components/complaintsManagement/ComplaintsTable";
 
 const ComplaintsManagement = () => {
     return (

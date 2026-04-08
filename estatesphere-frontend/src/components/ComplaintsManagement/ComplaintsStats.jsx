@@ -7,7 +7,7 @@ const ComplaintsStats = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             {stats.map((stat, index) => (
-                <div key={index} className="bg-white p-7 rounded-3xl border border-slate-100 shadow-xl shadow-slate-100/50 hover:shadow-2xl transition-all duration-300 group">
+                <div key={index} className="group premium-stat-card">
                     <div className="flex items-center justify-between mb-4">
                         <div className={`w-12 h-12 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center text-xl shadow-inner group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
                             {stat.icon}

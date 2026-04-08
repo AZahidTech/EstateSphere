@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import ChevronDownIcon from '../../assets/svg/common/ChevronDownIcon';
-import MenuIcon from '../../assets/svg/Navbar/MenuIcon';
-import XIcon from '../../assets/svg/Navbar/XIcon';
+import MenuIcon from '../../assets/svg/navbar/MenuIcon';
+import XIcon from '../../assets/svg/navbar/XIcon';
 import { Link } from 'react-router-dom';
-import Logo_Without_Name from "../../assets/Logo/Logo_Without_Name.png";
+import Logo_Without_Name from "../../assets/logo/Logo_Without_Name.png";
 
 import { navbarLinks } from '../../data/index.jsx';
 
@@ -15,7 +15,6 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 flex items-center justify-center transition-all duration-300">
               <img src={Logo_Without_Name} alt="Logo" className="w-full h-full object-contain" />

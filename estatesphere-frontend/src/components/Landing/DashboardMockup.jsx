@@ -1,7 +1,7 @@
 import React from 'react';
-import ArrowLeftDoubleIcon from '../../assets/svg/DashboardMockup/ArrowLeftDoubleIcon';
-import ArrowUpIcon from '../../assets/svg/DashboardMockup/ArrowUpIcon';
-import SecurityShieldIcon from '../../assets/svg/DashboardMockup/SecurityShieldIcon';
+import ArrowLeftDoubleIcon from '../../assets/svg/dashboardMockup/ArrowLeftDoubleIcon';
+import ArrowUpIcon from '../../assets/svg/dashboardMockup/ArrowUpIcon';
+import SecurityShieldIcon from '../../assets/svg/dashboardMockup/SecurityShieldIcon';
 import { dashboardMockupChartData, dashboardMockupActivities } from '../../data/index.jsx';
 
 export default function DashboardMockup() {

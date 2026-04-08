@@ -1,7 +1,7 @@
 import React from "react";
 import AdminSidebar from "../components/superAdminDashboard/AdminSidebar";
-import MessageList from "../components/Messages/MessageList";
-import ChatWindow from "../components/Messages/ChatWindow";
+import MessageList from "../components/messages/MessageList";
+import ChatWindow from "../components/messages/ChatWindow";
 
 const Messages = () => {
     return (
